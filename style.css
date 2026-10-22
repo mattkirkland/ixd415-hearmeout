@@ -31,3 +31,42 @@ pre {
   margin-top: 40px;
   font-size: 12px;
 }
+#schedule tr.current td {
+  background: #fff3b0;
+  font-weight: bold;
+}
+
+#schedule tr.current td:first-child {
+  box-shadow: inset 4px 0 0 #e0a800;
+}
+
+/* Dark mode: follows the visitor's system setting */
+@media (prefers-color-scheme: dark) {
+  body {
+    background: #121212;
+    color: #e6e6e6;
+  }
+
+  th,
+  td {
+    border-color: #888;
+  }
+
+  pre {
+    background: #2a2a2a;
+  }
+
+  a {
+    color: #8ab4f8;
+  }
+
+  a:visited {
+    color: #c58af9;
+  }
+}
+@media (prefers-color-scheme: dark) {
+  #schedule tr.current td {
+    background: #5c4a00;
+    color: #fff3b0;
+  }
+}
