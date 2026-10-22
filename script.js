@@ -40,7 +40,7 @@ function getToday() {
   return new Date(now.getFullYear(), now.getMonth(), now.getDate());
 }
 
-// Table dates are MM-DD-YYYY. Built from parts so it stays in local time.
+// Turns "09-09-2026" (MM-DD-YYYY) into a Date at local midnight.
 function parseScheduleDate(str) {
   var parts = str.split('-').map(Number);
   return new Date(parts[2], parts[0] - 1, parts[1]);
@@ -64,10 +64,33 @@ function highlightCurrentWeek() {
   }
 }
 
-// Turns "09-09-2026" (MM-DD-YYYY) into a Date at local midnight.
-function parseScheduleDate(str) {
-  var parts = str.split('-');
-  return new Date(parseInt(parts[2], 10), parseInt(parts[0], 10) - 1, parseInt(parts[1], 10));
+// Fills in #up-next with the next person presenting, e.g. "Up next: Madi, Wed Oct 28."
+// Skips weeks with nobody presenting (NA, NO CLASS, blank).
+function showUpNext() {
+  var el = document.getElementById('up-next');
+  if (!el) return;
+
+  var DAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+  var MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+                'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  var today = getToday();
+  var DAY = 24 * 60 * 60 * 1000;
+  var rows = getScheduleRows();
+
+  for (var i = 0; i < rows.length; i++) {
+    var who = rows[i].presenting;
+    if (who === '' || who === 'NA' || who === 'NO CLASS') continue;
+
+    var date = parseScheduleDate(rows[i].date);
+    var daysUntil = Math.round((date - today) / DAY);
+    if (daysUntil < 0) continue;
+
+    el.textContent = 'Up next: ' + who + ', ' +
+      DAYS[date.getDay()] + ' ' + MONTHS[date.getMonth()] + ' ' + date.getDate() + '.';
+    return;
+  }
+
+  el.textContent = 'All presentations are done for the semester.';
 }
 
 // Fills in #countdown with "Next presentation in N days", or says so if it's today.
@@ -104,5 +127,6 @@ function showCountdown() {
 
 document.addEventListener('DOMContentLoaded', function () {
   highlightCurrentWeek();
+  showUpNext();
   showCountdown();
 });
