@@ -64,3 +64,9 @@ pre {
     color: #c58af9;
   }
 }
+@media (prefers-color-scheme: dark) {
+  #schedule tr.current td {
+    background: #5c4a00;
+    color: #fff3b0;
+  }
+}
