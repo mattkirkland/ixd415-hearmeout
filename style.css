@@ -22,6 +22,12 @@ td {
   text-align: left;
 }
 
+/* Weeks that have already happened (class added in script.js) */
+.past td {
+  color: #888;
+  text-decoration: line-through;
+}
+
 pre {
   background: #eee;
   padding: 8px;
