@@ -4,7 +4,7 @@
 // Keep it dependency-free: plain browser JavaScript, no build step.
 
 // Returns the schedule table rows as plain objects, e.g.
-// { week: 3, date: "09-09-2026", book: "Perry", presenting: "Maya", row: <tr> }
+// { week: 3, date: "09-09-2026", book: "Perry", presenting: "Maya", title: "TBD", row: <tr> }
 function getScheduleRows() {
   var rows = document.querySelectorAll('#schedule tr');
   var out = [];
@@ -15,6 +15,7 @@ function getScheduleRows() {
       date: cells[1].textContent.trim(),
       book: cells[2].textContent.trim(),
       presenting: cells[3].textContent.trim(),
+      title: cells[4].textContent.trim(),
       row: rows[i]
     });
   }
