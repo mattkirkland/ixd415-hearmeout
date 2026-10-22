@@ -31,3 +31,11 @@ pre {
   margin-top: 40px;
   font-size: 12px;
 }
+#schedule tr.current td {
+  background: #fff3b0;
+  font-weight: bold;
+}
+
+#schedule tr.current td:first-child {
+  box-shadow: inset 4px 0 0 #e0a800;
+}
