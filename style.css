@@ -75,6 +75,16 @@ pre {
   box-shadow: inset 4px 0 0 #e0a800;
 }
 
+/* Zebra striping + hover, so a single row is easy to follow across the columns.
+   The :not() guards leave the current-week and no-class rows to their own styles. */
+#schedule tr:nth-child(even):not(.current):not(.no-class) td {
+  background: #f6f6f6;
+}
+
+#schedule tr:not(.current):not(.no-class):hover td {
+  background: #eef1f5;
+}
+
 /* Dark mode: follows the visitor's system setting */
 @media (prefers-color-scheme: dark) {
   body {
@@ -97,6 +107,14 @@ pre {
 
   a:visited {
     color: #c58af9;
+  }
+
+  #schedule tr:nth-child(even):not(.current):not(.no-class) td {
+    background: #1b1b1b;
+  }
+
+  #schedule tr:not(.current):not(.no-class):hover td {
+    background: #242424;
   }
 }
 @media (prefers-color-scheme: dark) {
