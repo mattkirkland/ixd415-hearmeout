@@ -114,5 +114,18 @@ pre {
   #schedule tr.current td {
     background: #5c4a00;
     color: #fff3b0;
+      .up-next {
+    border-color: #888;
   }
+  }
+  .up-next {
+  border: 1px solid #000;
+  padding: 8px 12px;
+  margin: 16px 0;
+  font-weight: bold;
+}
+
+.up-next:empty {
+  display: none;
+}
 }
