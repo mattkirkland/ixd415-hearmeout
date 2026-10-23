@@ -1,7 +1,7 @@
 // Hear Me Out - shared schedule data
 //
-// This is the one place the schedule lives for the poster pages. Every poster
-// variant reads from here, so a change here shows up in all of them.
+// This is the one place the schedule lives. The schedule table on index.html
+// and every poster variant read from here, so a change here shows up everywhere.
 //
 // It's a plain JS file rather than JSON so it works when you open an HTML file
 // straight from disk (browsers block fetch() of local JSON files).
