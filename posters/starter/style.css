@@ -1,0 +1,108 @@
+/* Starter poster. Plain on purpose. Replace all of it. */
+
+body {
+  margin: 0;
+  font-family: Georgia, serif;
+  background: #f4f1ea;
+  color: #1a1a1a;
+}
+
+.poster {
+  max-width: 640px;
+  margin: 40px auto;
+  padding: 40px;
+  background: #fff;
+  border: 1px solid #ccc;
+}
+
+.kicker {
+  margin: 0;
+  font-size: 13px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #666;
+}
+
+h1 {
+  margin: 8px 0 0;
+  font-size: 56px;
+  line-height: 1;
+}
+
+.subtitle {
+  margin: 8px 0 0;
+  font-size: 20px;
+  font-style: italic;
+  color: #444;
+}
+
+.blurb {
+  margin: 32px 0;
+  font-size: 17px;
+  line-height: 1.5;
+}
+
+.next-up {
+  margin: 32px 0;
+  padding: 16px;
+  border-left: 4px solid #1a1a1a;
+  background: #f4f1ea;
+}
+
+.next-up h2 {
+  margin: 0 0 4px;
+  font-size: 13px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.next-up p {
+  margin: 0;
+  font-size: 18px;
+}
+
+.talks {
+  list-style: none;
+  padding: 0;
+  margin: 32px 0;
+  border-top: 1px solid #1a1a1a;
+}
+
+.talks li {
+  display: grid;
+  grid-template-columns: 70px 110px 1fr;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid #ddd;
+  font-size: 16px;
+}
+
+.talks .date {
+  color: #666;
+}
+
+.talks .speaker {
+  font-weight: bold;
+}
+
+.talks .title {
+  font-style: italic;
+}
+
+/* poster.js adds these classes based on today's date */
+.talks li.past {
+  color: #999;
+}
+
+.talks li.next {
+  background: #fff3b0;
+}
+
+footer {
+  font-size: 14px;
+  color: #666;
+}
+
+footer p {
+  margin: 0;
+}

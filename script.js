@@ -1,7 +1,51 @@
 // Hear Me Out - page scripts
 //
-// Nothing much here yet. The idea is that this file grows as issues get worked.
+// The schedule table is built from data.js (see renderSchedule). The rest grows as issues get worked.
 // Keep it dependency-free: plain browser JavaScript, no build step.
+
+// Builds the schedule table rows from HEAR_ME_OUT.weeks (data.js).
+// The table in index.html only has the header row; everything else comes from here.
+// Cell text matches what the other functions expect: dates as MM-DD-YYYY, "NA" for
+// weeks before presentations start, a .no-class row for weeks with no class.
+// (Issue #8, human-readable dates, can change the date format in this one place.)
+function renderSchedule() {
+  var table = document.getElementById('schedule');
+  if (!table || !window.HEAR_ME_OUT) return;
+
+  function cell(text, className) {
+    var td = document.createElement('td');
+    if (className) td.className = className;
+    td.textContent = text;
+    return td;
+  }
+
+  HEAR_ME_OUT.weeks.forEach(function (w) {
+    var tr = document.createElement('tr');
+    var p = w.date.split('-'); // YYYY-MM-DD -> MM-DD-YYYY
+    var date = p[1] + '-' + p[2] + '-' + p[0];
+
+    tr.appendChild(cell(w.week));
+    tr.appendChild(cell(date));
+
+    if (w.note === 'No class') {
+      tr.className = 'no-class';
+      var td = document.createElement('td');
+      var label = document.createElement('span');
+      label.className = 'no-class-label';
+      label.textContent = 'No class';
+      td.appendChild(label);
+      tr.appendChild(td);
+      tr.appendChild(cell(''));
+      tr.appendChild(cell(''));
+    } else {
+      tr.appendChild(cell(w.book || ''));
+      tr.appendChild(cell(w.speaker || 'NA'));
+      tr.appendChild(cell(w.speaker ? (w.title || 'TBD') : 'NA'));
+    }
+
+    table.appendChild(tr);
+  });
+}
 
 // Returns the schedule table rows as plain objects, e.g.
 // { week: 3, date: "09-09-2026", book: "Perry", presenting: "Maya", title: "TBD", row: <tr> }
@@ -126,6 +170,7 @@ function showCountdown() {
 }
 
 document.addEventListener('DOMContentLoaded', function () {
+  renderSchedule();
   highlightCurrentWeek();
   showUpNext();
   showCountdown();

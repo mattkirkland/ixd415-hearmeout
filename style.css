@@ -129,3 +129,20 @@ pre {
   display: none;
 }
 }
+/* Banner linking to the poster viewer */
+.poster-banner {
+  padding: 12px 16px;
+  border: 2px solid #000;
+  margin: 16px 0;
+}
+
+.poster-banner a {
+  font-weight: bold;
+  margin-right: 8px;
+}
+
+@media (prefers-color-scheme: dark) {
+  .poster-banner {
+    border-color: #888;
+  }
+}
