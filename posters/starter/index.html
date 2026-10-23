@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hear Me Out poster: Starter</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!--
+    This is the starter poster. Copy this folder, rename it, and change
+    whatever you want: the markup, the styles, the order, all of it.
+
+    The data-series, data-talks, and data-field attributes are how poster.js
+    fills in the content from ../../data.js. See posters/poster.js for the
+    full list of what you can use. You don't have to keep any of this
+    structure; just keep reading from the shared data.
+  -->
+
+  <main class="poster">
+
+    <header>
+      <p class="kicker" data-series="course"></p>
+      <h1 data-series="title"></h1>
+      <p class="subtitle" data-series="subtitle"></p>
+    </header>
+
+    <p class="blurb" data-series="blurb"></p>
+
+    <section class="next-up">
+      <h2>Next up</h2>
+      <p>
+        <strong data-next="speaker"></strong>,
+        <span data-next="date" data-format="long"></span>:
+        <em data-next="title"></em>
+      </p>
+    </section>
+
+    <ol class="talks" data-talks>
+      <template>
+        <li>
+          <span class="date" data-field="date"></span>
+          <span class="speaker" data-field="speaker"></span>
+          <span class="title" data-field="title"></span>
+        </li>
+      </template>
+    </ol>
+
+    <footer>
+      <p><span data-series="when"></span>, <span data-series="where"></span>. <span data-series="term"></span>.</p>
+    </footer>
+
+  </main>
+
+  <script src="../../data.js"></script>
+  <script src="../poster.js"></script>
+</body>
+</html>
