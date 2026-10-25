@@ -3,11 +3,19 @@
 // The schedule table is built from data.js (see renderSchedule). The rest grows as issues get worked.
 // Keep it dependency-free: plain browser JavaScript, no build step.
 
+// Formats a Date the way a person would say it, e.g. "Wed, Sep 9".
+function formatDate(date) {
+  var DAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+  var MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+                'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  return DAYS[date.getDay()] + ', ' + MONTHS[date.getMonth()] + ' ' + date.getDate();
+}
+
 // Builds the schedule table rows from HEAR_ME_OUT.weeks (data.js).
 // The table in index.html only has the header row; everything else comes from here.
-// Cell text matches what the other functions expect: dates as MM-DD-YYYY, "NA" for
-// weeks before presentations start, a .no-class row for weeks with no class.
-// (Issue #8, human-readable dates, can change the date format in this one place.)
+// Dates are shown the way a person would say them ("Wed, Sep 9") and the machine-readable
+// MM-DD-YYYY is kept in the cell's data-date attribute for getScheduleRows(). "NA" marks
+// weeks before presentations start, and a .no-class row marks a week with no class.
 function renderSchedule() {
   var table = document.getElementById('schedule');
   if (!table || !window.HEAR_ME_OUT) return;
@@ -21,11 +29,12 @@ function renderSchedule() {
 
   HEAR_ME_OUT.weeks.forEach(function (w) {
     var tr = document.createElement('tr');
-    var p = w.date.split('-'); // YYYY-MM-DD -> MM-DD-YYYY
-    var date = p[1] + '-' + p[2] + '-' + p[0];
+    var p = w.date.split('-'); // YYYY-MM-DD
+    var dateCell = cell(formatDate(new Date(p[0], p[1] - 1, p[2])));
+    dateCell.setAttribute('data-date', p[1] + '-' + p[2] + '-' + p[0]); // MM-DD-YYYY
 
     tr.appendChild(cell(w.week));
-    tr.appendChild(cell(date));
+    tr.appendChild(dateCell);
 
     if (w.note === 'No class') {
       tr.className = 'no-class';
@@ -56,7 +65,7 @@ function getScheduleRows() {
     var cells = rows[i].querySelectorAll('td');
     out.push({
       week: parseInt(cells[0].textContent, 10),
-      date: cells[1].textContent.trim(),
+      date: cells[1].getAttribute('data-date'), // MM-DD-YYYY; the cell text is for people
       book: cells[2].textContent.trim(),
       presenting: cells[3].textContent.trim(),
       title: cells[4].textContent.trim(),
