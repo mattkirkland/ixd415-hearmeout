@@ -15,6 +15,14 @@ table {
   border-collapse: collapse;
 }
 
+/* Small and muted so it doesn't read as a second heading */
+caption {
+  font-size: 14px;
+  text-align: left;
+  opacity: 0.75;
+  padding-bottom: 4px;
+}
+
 th,
 td {
   border: 1px solid #000;
