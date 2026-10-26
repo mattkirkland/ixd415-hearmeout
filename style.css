@@ -4,6 +4,7 @@
 body {
   font-family: serif;
   margin: 20px;
+  background: #fff;
 }
 
 h1 {
@@ -153,4 +154,29 @@ pre {
   .poster-banner {
     border-color: #888;
   }
+}
+
+/* Custom cursor (cursor.js): a white circle that inverts whatever is under it.
+   mix-blend-mode: difference flips the colors, but only inside the circle. */
+html.custom-cursor,
+html.custom-cursor * {
+  cursor: none !important;
+}
+
+.cursor-dot {
+  position: fixed;
+  top: -12px;
+  left: -12px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #fff;
+  mix-blend-mode: difference;
+  pointer-events: none;
+  z-index: 2147483647;
+  opacity: 0;
+}
+
+.cursor-dot.visible {
+  opacity: 1;
 }
