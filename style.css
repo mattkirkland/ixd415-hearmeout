@@ -15,6 +15,14 @@ table {
   border-collapse: collapse;
 }
 
+/* Small and muted so it doesn't read as a second heading */
+caption {
+  font-size: 14px;
+  text-align: left;
+  opacity: 0.75;
+  padding-bottom: 4px;
+}
+
 th,
 td {
   border: 1px solid #000;
@@ -37,6 +45,41 @@ pre {
   margin-top: 40px;
   font-size: 12px;
 }
+/* Week with no class: one striped band across the row, so it reads as a gap */
+#schedule tr.no-class td {
+  background: repeating-linear-gradient(-45deg, #f6f6f6 0 6px, #ececec 6px 12px);
+  color: #555;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+/* Drop the lines between the cells after the week number */
+#schedule tr.no-class td:nth-child(n+2):not(:last-child) {
+  border-right-color: transparent;
+}
+
+#schedule tr.no-class td:nth-child(n+3) {
+  border-left-color: transparent;
+}
+
+#schedule tr.no-class td:nth-child(2) {
+  text-decoration: line-through;
+}
+
+.no-class-label {
+  display: inline-block;
+  padding: 2px 10px;
+  border: 1px dashed #888;
+  border-radius: 999px;
+  background: #fff;
+  color: #444;
+  font-family: sans-serif;
+  font-size: 0.75em;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
 #schedule tr.current td {
   background: #fff3b0;
   font-weight: bold;
@@ -68,5 +111,52 @@ pre {
 
   a:visited {
     color: #c58af9;
+  }
+}
+@media (prefers-color-scheme: dark) {
+  #schedule tr.no-class td {
+    background: repeating-linear-gradient(-45deg, #1a1a1a 0 6px, #242424 6px 12px);
+    color: #9a9a9a;
+  }
+
+  .no-class-label {
+    background: #121212;
+    border-color: #777;
+    color: #ccc;
+  }
+
+  #schedule tr.current td {
+    background: #5c4a00;
+    color: #fff3b0;
+      .up-next {
+    border-color: #888;
+  }
+  }
+  .up-next {
+  border: 1px solid #000;
+  padding: 8px 12px;
+  margin: 16px 0;
+  font-weight: bold;
+}
+
+.up-next:empty {
+  display: none;
+}
+}
+/* Banner linking to the poster viewer */
+.poster-banner {
+  padding: 12px 16px;
+  border: 2px solid #000;
+  margin: 16px 0;
+}
+
+.poster-banner a {
+  font-weight: bold;
+  margin-right: 8px;
+}
+
+@media (prefers-color-scheme: dark) {
+  .poster-banner {
+    border-color: #888;
   }
 }

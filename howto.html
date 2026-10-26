@@ -171,6 +171,25 @@ git config --global user.email "you@example.com"</pre>
 git pull</pre>
     <p>Then pick the next issue and start again from Step 2.</p>
 
+    <h2 id="adding-a-poster">Adding a poster</h2>
+    <p>
+      The second project on this site is a set of posters for the series, one per
+      student, each a different design built on the same shared data. Same loop as
+      above, with a few specifics:
+    </p>
+    <ol>
+      <li>Copy <code>posters/starter</code> to <code>posters/&lt;your-slug&gt;</code>. Lowercase, hyphens, no spaces.</li>
+      <li>Make the copy yours. Change the HTML and CSS however you like, but keep the
+        speakers, dates, and titles coming from <code>data.js</code>. The top of
+        <code>posters/poster.js</code> explains the attributes that do that.</li>
+      <li>Add one line for your poster at the end of the list in <code>posters/manifest.js</code>.</li>
+      <li>Open <code>poster.html</code> in a browser and page to yours to check it.</li>
+      <li>Branch, commit, push, PR, with a screenshot in the description.</li>
+    </ol>
+    <p>
+      More detail in <a href="https://github.com/mattkirkland/ixd415-hearmeout/tree/main/posters">posters/README.md</a>.
+    </p>
+
     <h2>If something goes wrong</h2>
     <p>
       <strong>I made changes on <code>main</code> by mistake.</strong> As long as you haven't
@@ -201,7 +220,7 @@ git pull</pre>
   </div>
 
   <div class="bottom">
-    <p>IXD 415</p>
+    <p><a href="https://ixd415.mattkirkland.com">IXD 415</a></p>
   </div>
 
 </body>

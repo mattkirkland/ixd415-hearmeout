@@ -10,6 +10,9 @@ Live site: https://mattkirkland.github.io/ixd415-hearmeout/
 - `howto.html` - how to work an issue (same steps as below, for the class)
 - `style.css` - styles (there aren't many yet)
 - `script.js` - page scripts (there's almost nothing here yet)
+- `data.js` - the schedule as data, shared by all the posters
+- `poster.html` - viewer that pages through the poster variants
+- `posters/` - one folder per poster variant, plus the helper and the list of variants (see `posters/README.md`)
 
 No build step, no dependencies. Open `index.html` in a browser and it works.
 

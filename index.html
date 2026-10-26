@@ -3,17 +3,22 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Untitled</title>
+  <title>Hear Me Out - IXD 415</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
   <div class="top">
     <h1>Hear Me Out</h1>
-    <p>IXD 415 presentation schedule, Fall 2026</p>
+    <p><a href="https://ixd415.mattkirkland.com">IXD 415</a> presentation schedule, Fall 2026</p>
   </div>
-
+<p id="up-next" class="up-next"></p>
   <div class="content">
+
+    <p class="poster-banner">
+      <a href="poster.html">See the poster &rarr;</a>
+      Each one is a different take on the same series.
+    </p>
 
     <h2>What this is</h2>
     <p>
@@ -33,126 +38,21 @@
     <p id="countdown"></p>
 
     <table id="schedule">
+      <caption>Presentation schedule, one presenter per week</caption>
       <tr>
         <th>Week</th>
         <th>Date</th>
-        <th>Book on loan</th>
+        <th>Book on loan*</th>
         <th>Presenting</th>
         <th>Talk title</th>
       </tr>
-      <tr>
-        <td>1</td>
-        <td>08-26-2026</td>
-        <td>Matt</td>
-        <td>NA</td>
-        <td>NA</td>
-      </tr>
-      <tr>
-        <td>2</td>
-        <td>09-02-2026</td>
-        <td>Maya</td>
-        <td>NA</td>
-        <td>NA</td>
-      </tr>
-      <tr>
-        <td>3</td>
-        <td>09-09-2026</td>
-        <td>Perry</td>
-        <td>Maya</td>
-        <td>TBD</td>
-      </tr>
-      <tr>
-        <td>4</td>
-        <td>09-16-2026</td>
-        <td>Saj</td>
-        <td>Perry</td>
-        <td>TBD</td>
-      </tr>
-      <tr>
-        <td>5</td>
-        <td>09-23-2026</td>
-        <td>Quin</td>
-        <td>Saj</td>
-        <td>TBD</td>
-      </tr>
-      <tr>
-        <td>6</td>
-        <td>09-30-2026</td>
-        <td>Cami</td>
-        <td>Quin</td>
-        <td>TBD</td>
-      </tr>
-      <tr>
-        <td>7</td>
-        <td>10-07-2026</td>
-        <td>Matt</td>
-        <td>Cami</td>
-        <td>TBD</td>
-      </tr>
-      <tr>
-        <td>8</td>
-        <td>10-14-2026</td>
-        <td>NO CLASS</td>
-        <td>NO CLASS</td>
-        <td>NO CLASS</td>
-      </tr>
-      <tr>
-        <td>9</td>
-        <td>10-21-2026</td>
-        <td>Madi</td>
-        <td>Matt</td>
-        <td>TBD</td>
-      </tr>
-      <tr>
-        <td>10</td>
-        <td>10-28-2026</td>
-        <td>Leandra</td>
-        <td>Madi</td>
-        <td>TBD</td>
-      </tr>
-      <tr>
-        <td>11</td>
-        <td>11-04-2026</td>
-        <td>Alex</td>
-        <td>Leandra</td>
-        <td>TBD</td>
-      </tr>
-      <tr>
-        <td>12</td>
-        <td>11-11-2026</td>
-        <td>Loudon</td>
-        <td>Alex</td>
-        <td>TBD</td>
-      </tr>
-      <tr>
-        <td>13</td>
-        <td>11-18-2026</td>
-        <td>Sicily</td>
-        <td>Loudon</td>
-        <td>TBD</td>
-      </tr>
-      <tr>
-        <td>14</td>
-        <td>11-25-2026</td>
-        <td>Tori</td>
-        <td>Silcily</td>
-        <td>TBD</td>
-      </tr>
-      <tr>
-        <td>15</td>
-        <td>12-02-2026</td>
-        <td>Nathan</td>
-        <td>Tori</td>
-        <td>TBD</td>
-      </tr>
-      <tr>
-        <td>16</td>
-        <td>12-09-2026</td>
-        <td></td>
-        <td>Nathan</td>
-        <td>TBD</td>
-      </tr>
+      <!-- Rows are filled in by renderSchedule() in script.js, from data.js -->
     </table>
+    <noscript><p>The schedule needs JavaScript to display. It's in <a href="data.js">data.js</a>.</p></noscript>
+    <p>
+      <small>* Who has the book that week. The book goes to whoever presents next,
+      so they have it the week before their turn.</small>
+    </p>
 
     <h2>Rules</h2>
     <p>TODO</p>
@@ -166,9 +66,11 @@
   </div>
 
   <div class="bottom">
-    <p>IXD 415</p>
+    <p><a href="https://ixd415.mattkirkland.com">IXD 415</a></p>
+    <p><a href="https://github.com/mattkirkland/ixd415-hearmeout">View this site on GitHub</a></p>
   </div>
 
+  <script src="data.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
