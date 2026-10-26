@@ -1,42 +1,9 @@
 /* Hear Me Out - base styles
    Keep it plain for now. We'll add to this as issues get worked. */
 
-/* Same three colors as the animated gradient, shown while it loads
-   or if the browser can't run it */
-html {
-  min-height: 100%;
-  background: linear-gradient(135deg, #2697ab, #6d8c65 55%, #004600);
-}
-
-/* Fills the window behind everything; background.js draws into it */
-#background {
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-}
-
-/* The page sits on a frosted panel so the text stays readable over the gradient */
 body {
   font-family: serif;
   margin: 20px;
-  padding: 4px 24px 24px;
-  border-radius: 12px;
-  background: rgba(255, 255, 255, 0.75);
-  -webkit-backdrop-filter: blur(18px);
-  backdrop-filter: blur(18px);
-  color: #1a1a1a;
-}
-
-a {
-  color: #0f4f5a;
-}
-
-a:visited {
-  color: #34502e;
-}
-
-th {
-  background: #dcecee;
 }
 
 h1 {
@@ -111,7 +78,7 @@ pre {
 /* Dark mode: follows the visitor's system setting */
 @media (prefers-color-scheme: dark) {
   body {
-    background: rgba(18, 18, 18, 0.78);
+    background: #121212;
     color: #e6e6e6;
   }
 
@@ -120,20 +87,16 @@ pre {
     border-color: #888;
   }
 
-  th {
-    background: #1d3a40;
-  }
-
   pre {
     background: #2a2a2a;
   }
 
   a {
-    color: #7fd0de;
+    color: #8ab4f8;
   }
 
   a:visited {
-    color: #a9c79f;
+    color: #c58af9;
   }
 }
 @media (prefers-color-scheme: dark) {
@@ -182,4 +145,80 @@ pre {
   .poster-banner {
     border-color: #888;
   }
+}
+
+/* Color system: Lagoon (issue #41)
+   Built from teal #2697ab, sage #6d8c65 and deep green #004600.
+   Every text color here is at least 4.5:1 against its background. */
+:root {
+  --bg: #eef5f5;
+  --surface: #ffffff;
+  --text: #14282b;
+  --muted: #4b6266;
+  --link: #0f5f6e;
+  --visited: #3d5f37;
+  --border: #9cbcc1;
+  --th-bg: #d3e9ec;
+  --th-text: #14282b;
+  --accent: #2697ab;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0d1c1f;
+    --surface: #132a2e;
+    --text: #e3eff0;
+    --muted: #9db7bb;
+    --link: #7fd0de;
+    --visited: #a9c79f;
+    --border: #3c5d62;
+    --th-bg: #1d3a40;
+    --th-text: #e3eff0;
+    --accent: #2697ab;
+  }
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+}
+
+a {
+  color: var(--link);
+}
+
+a:visited {
+  color: var(--visited);
+}
+
+th,
+td {
+  border-color: var(--border);
+}
+
+th {
+  background: var(--th-bg);
+  color: var(--th-text);
+}
+
+#schedule td {
+  background: var(--surface);
+}
+
+.no-class-label {
+  background: var(--surface);
+}
+
+.up-next,
+.poster-banner {
+  border-color: var(--border);
+  background: var(--surface);
+}
+
+#schedule tr.current td:first-child {
+  box-shadow: inset 4px 0 0 var(--accent);
+}
+
+.bottom {
+  color: var(--muted);
 }
