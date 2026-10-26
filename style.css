@@ -2,8 +2,10 @@
    Keep it plain for now. We'll add to this as issues get worked. */
 
 body {
-  font-family: serif;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
   margin: 20px;
+  background: #fff;
 }
 
 h1 {
@@ -15,11 +17,25 @@ table {
   border-collapse: collapse;
 }
 
+/* Small and muted so it doesn't read as a second heading */
+caption {
+  font-size: 14px;
+  text-align: left;
+  opacity: 0.75;
+  padding-bottom: 4px;
+}
+
 th,
 td {
   border: 1px solid #000;
   padding: 4px 8px;
   text-align: left;
+}
+
+/* Weeks that have already happened (class added in script.js) */
+.past td {
+  color: #888;
+  text-decoration: line-through;
 }
 
 pre {
@@ -30,6 +46,11 @@ pre {
 .bottom {
   margin-top: 40px;
   font-size: 12px;
+}
+
+/* Keep lines of text to a comfortable reading length */
+p {
+  max-width: 70ch;
 }
 /* Week with no class: one striped band across the row, so it reads as a gap */
 #schedule tr.no-class td {
@@ -75,6 +96,18 @@ pre {
   box-shadow: inset 4px 0 0 #e0a800;
 }
 
+/* "Up next" callout, filled in by showUpNext() in script.js */
+.up-next {
+  border: 1px solid #000;
+  padding: 8px 12px;
+  margin: 16px 0;
+  font-weight: bold;
+}
+
+.up-next:empty {
+  display: none;
+}
+
 /* Dark mode: follows the visitor's system setting */
 @media (prefers-color-scheme: dark) {
   body {
@@ -114,20 +147,11 @@ pre {
   #schedule tr.current td {
     background: #5c4a00;
     color: #fff3b0;
-      .up-next {
+  }
+
+  .up-next {
     border-color: #888;
   }
-  }
-  .up-next {
-  border: 1px solid #000;
-  padding: 8px 12px;
-  margin: 16px 0;
-  font-weight: bold;
-}
-
-.up-next:empty {
-  display: none;
-}
 }
 /* Banner linking to the poster viewer */
 .poster-banner {
@@ -221,4 +245,29 @@ th {
 
 .bottom {
   color: var(--muted);
+}
+
+/* Custom cursor (cursor.js): a white circle that inverts whatever is under it.
+   mix-blend-mode: difference flips the colors, but only inside the circle. */
+html.custom-cursor,
+html.custom-cursor * {
+  cursor: none !important;
+}
+
+.cursor-dot {
+  position: fixed;
+  top: -12px;
+  left: -12px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #fff;
+  mix-blend-mode: difference;
+  pointer-events: none;
+  z-index: 2147483647;
+  opacity: 0;
+}
+
+.cursor-dot.visible {
+  opacity: 1;
 }

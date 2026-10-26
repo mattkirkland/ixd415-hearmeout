@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Hear Me Out - IXD 415</title>
   <link rel="stylesheet" href="style.css">
+  <script src="cursor.js" defer></script>
 </head>
 <body>
 
@@ -38,19 +39,28 @@
     <p id="countdown"></p>
 
     <table id="schedule">
+      <caption>Presentation schedule, one presenter per week</caption>
       <tr>
         <th>Week</th>
         <th>Date</th>
-        <th>Book on loan</th>
+        <th>Book on loan*</th>
         <th>Presenting</th>
         <th>Talk title</th>
       </tr>
       <!-- Rows are filled in by renderSchedule() in script.js, from data.js -->
     </table>
     <noscript><p>The schedule needs JavaScript to display. It's in <a href="data.js">data.js</a>.</p></noscript>
+    <p>
+      <small>* Who has the book that week. The book goes to whoever presents next,
+      so they have it the week before their turn.</small>
+    </p>
 
     <h2>Rules</h2>
-    <p>TODO</p>
+    <ul>
+      <li>Talk for at least 5 minutes and no more than 10.</li>
+      <li>The deck isn’t the deliverable. You are.</li>
+      <li>The theme is “hear me out”: pick something you believe and make your case.</li>
+    </ul>
 
     <h2>Working on this site</h2>
     <p>
