@@ -171,6 +171,82 @@ p {
   }
 }
 
+/* Color system: Lagoon (issue #41)
+   Built from teal #2697ab, sage #6d8c65 and deep green #004600.
+   Every text color here is at least 4.5:1 against its background. */
+:root {
+  --bg: #eef5f5;
+  --surface: #ffffff;
+  --text: #14282b;
+  --muted: #4b6266;
+  --link: #0f5f6e;
+  --visited: #3d5f37;
+  --border: #9cbcc1;
+  --th-bg: #d3e9ec;
+  --th-text: #14282b;
+  --accent: #2697ab;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0d1c1f;
+    --surface: #132a2e;
+    --text: #e3eff0;
+    --muted: #9db7bb;
+    --link: #7fd0de;
+    --visited: #a9c79f;
+    --border: #3c5d62;
+    --th-bg: #1d3a40;
+    --th-text: #e3eff0;
+    --accent: #2697ab;
+  }
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+}
+
+a {
+  color: var(--link);
+}
+
+a:visited {
+  color: var(--visited);
+}
+
+th,
+td {
+  border-color: var(--border);
+}
+
+th {
+  background: var(--th-bg);
+  color: var(--th-text);
+}
+
+#schedule td {
+  background: var(--surface);
+}
+
+.no-class-label {
+  background: var(--surface);
+}
+
+.up-next,
+.poster-banner {
+  border-color: var(--border);
+  background: var(--surface);
+}
+
+#schedule tr.current td:first-child {
+  box-shadow: inset 4px 0 0 var(--accent);
+}
+
+.bottom {
+  color: var(--muted);
+}
+
 /* Custom cursor (cursor.js): a white circle that inverts whatever is under it.
    mix-blend-mode: difference flips the colors, but only inside the circle. */
 html.custom-cursor,
