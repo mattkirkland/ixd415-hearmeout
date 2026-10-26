@@ -38,7 +38,7 @@ window.HEAR_ME_OUT = {
     { week: 13, date: "2026-11-18", speaker: "Loudon",  title: "TBD", book: "Sicily" },
     { week: 14, date: "2026-11-25", speaker: "Sicily",  title: "TBD", book: "Tori" },
     { week: 15, date: "2026-12-02", speaker: "Tori",    title: "TBD", book: "Nathan" },
-    { week: 16, date: "2026-12-09", speaker: "Nathan",  title: "TBD", book: null }
+    { week: 16, date: "2026-12-09", speaker: "Nathan",  title: "TBD", book: Back to Matt }
   ]
 };
 
