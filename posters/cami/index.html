@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hear Me Out poster: Cami</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Climate+Crisis&family=Inter:wght@500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!--
+    Cami's poster. Bold Swiss type on an 18x24 sheet: off-white paper,
+    black type, red accents, and the title in giant quotation marks.
+    Content comes from ../../data.js through poster.js.
+  -->
+
+  <main class="poster">
+
+    <h1 class="title" data-series="title"></h1>
+
+    <section class="next-up">
+      <h2>Next up</h2>
+      <p class="next-speaker" data-next="speaker"></p>
+      <p class="next-date" data-next="date" data-format="long"></p>
+      <p class="next-title" data-next="title"></p>
+    </section>
+
+    <section class="schedule">
+      <h2>Schedule</h2>
+      <ol class="talks" data-talks>
+        <template>
+          <li>
+            <span class="date" data-field="date" data-format="numeric"></span>
+            <span class="speaker" data-field="speaker"></span>
+            <span class="talk-title" data-field="title"></span>
+          </li>
+        </template>
+      </ol>
+    </section>
+
+    <footer>
+      <p class="course">
+        <span data-series="course"></span><br>
+        <span data-series="subtitle"></span> &middot; <span data-series="term"></span>
+      </p>
+      <p class="blurb" data-series="blurb"></p>
+    </footer>
+
+  </main>
+
+  <script src="../../data.js"></script>
+  <script src="../poster.js"></script>
+  <script>
+    // Add #grid to the URL to show the 6-column grid over the poster.
+    if (location.hash === '#grid') document.body.classList.add('show-grid');
+  </script>
+</body>
+</html>
