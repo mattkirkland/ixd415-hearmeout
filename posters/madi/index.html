@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hear Me Out poster: Madi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;800&family=Inter+Tight:wght@900&family=UnifrakturMaguntia&display=swap">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!--
+    Madi's poster: medieval punk. Halftone-style woodcut knight on the left,
+    grotesk + blackletter title on the right.
+
+    All the content (series info, next speaker, schedule) is filled in by
+    ../poster.js from ../../data.js. The only hardcoded text is the knight's
+    speech bubble and the styled title lettering, which mirrors data-series="title".
+  -->
+
+  <!-- SVG filters for the worn print texture. Used from style.css. -->
+  <svg class="defs" aria-hidden="true">
+    <filter id="rough">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="3"/>
+      <feDisplacementMap in="SourceGraphic" scale="1.1"/>
+    </filter>
+    <!-- Rubbed-off frame: rough edges plus patchy worn areas -->
+    <filter id="wear" x="-5%" y="-5%" width="110%" height="110%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="5" result="f"/>
+      <feDisplacementMap in="SourceGraphic" in2="f" scale="1.6" result="r"/>
+      <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="4" seed="21" result="big"/>
+      <feColorMatrix in="big" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -16 7.4" result="rub"/>
+      <feTurbulence type="fractalNoise" baseFrequency="0.6" numOctaves="2" seed="9" result="fine"/>
+      <feColorMatrix in="fine" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -30 12.6" result="pits"/>
+      <feComposite in="rub" in2="pits" operator="arithmetic" k1="0" k2="1" k3="1" k4="0" result="holes"/>
+      <feComposite in="r" in2="holes" operator="out"/>
+    </filter>
+    <!-- Light ink speckle on the big type -->
+    <filter id="distress" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="3" result="n1"/>
+      <feDisplacementMap in="SourceGraphic" in2="n1" scale="1.4" result="rough"/>
+      <feTurbulence type="fractalNoise" baseFrequency="0.35" numOctaves="3" seed="11" result="n2"/>
+      <feColorMatrix in="n2" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -26 6.9" result="holes"/>
+      <feComposite in="rough" in2="holes" operator="out"/>
+    </filter>
+  </svg>
+
+  <main class="poster">
+    <div class="frame">
+      <div class="panel">
+
+        <div class="plate">
+          <svg class="bubble" viewBox="0 0 170 120" aria-hidden="true">
+            <path d="M22 14 C60 2 128 4 154 18 C172 30 168 64 150 74 C128 86 92 86 70 82 L40 112 L48 80 C20 76 4 62 6 44 C8 28 12 18 22 14 Z"/>
+            <text x="86" y="42" text-anchor="middle">Hear ye,</text>
+            <text x="86" y="68" text-anchor="middle">hear ye!</text>
+          </svg>
+          <img class="knight" src="knight.png" alt="">
+        </div>
+
+        <div class="col">
+          <p class="label kicker" data-series="course"></p>
+
+          <!-- Real title for screen readers; the styled one below is decoration -->
+          <h1 class="visually-hidden" data-series="title"></h1>
+          <p class="title distress" aria-hidden="true">
+            <span><span class="bl">H</span>ear</span>
+            <span class="l2">M<span class="bl">E</span></span>
+            <span class="l3"><span class="bl">O</span>ut</span>
+          </p>
+
+          <p class="blurb" data-series="blurb"></p>
+
+          <section class="hero">
+            <h2 class="label">Next up</h2>
+            <p class="who distress" data-next="speaker"></p>
+            <p class="meta"><span data-next="date" data-format="long"></span> · <em data-next="title"></em></p>
+          </section>
+
+          <ol class="talks" data-talks>
+            <template>
+              <li>
+                <span data-field="date"></span>
+                <span class="speaker" data-field="speaker"></span>
+                <span data-field="title"></span>
+              </li>
+            </template>
+          </ol>
+
+          <footer class="foot label">
+            <span data-series="when"></span>
+            <span data-series="term"></span>
+          </footer>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <script src="../../data.js"></script>
+  <script src="../poster.js"></script>
+  <script>
+    // Scale the fixed 800x1100 poster down to fit smaller windows (like the viewer).
+    (function () {
+      var poster = document.querySelector('.poster');
+      function fit() {
+        var s = Math.min(1, window.innerWidth / 800, window.innerHeight / 1100);
+        poster.style.setProperty('--scale', s);
+      }
+      window.addEventListener('resize', fit);
+      fit();
+    })();
+  </script>
+</body>
+</html>
