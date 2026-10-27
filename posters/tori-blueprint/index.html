@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hear Me Out poster: Blueprint</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!--
+    Tori's poster: a quiet blueprint sheet. All copy comes from ../../data.js
+    via poster.js. blueprint.js draws the construction lines (hatching,
+    dimension arrows, guides on the heading) on an SVG layer that sits only
+    in the gaps between text.
+  -->
+
+  <main class="poster">
+    <svg class="construction" aria-hidden="true"></svg>
+
+    <p class="v-label" data-series="course"></p>
+
+    <!-- 1. heading -->
+    <h1 class="title" data-series="title"></h1>
+
+    <!-- series details, top right -->
+    <section class="details">
+      <p class="subtitle" data-series="subtitle"></p>
+      <p class="when-where">
+        <span data-series="when"></span>
+        <span data-series="where"></span>
+        <span data-series="term"></span>
+      </p>
+    </section>
+
+    <!-- 2. who's presenting next -->
+    <section class="next-up">
+      <p class="next-speaker" data-next="speaker"></p>
+      <p class="next-title" data-next="title"></p>
+      <p class="next-date" data-next="date" data-format="long"></p>
+    </section>
+
+    <!-- blurb, bottom left -->
+    <p class="blurb" data-series="blurb"></p>
+
+    <!-- 3. the lineup -->
+    <ol class="lineup" data-talks>
+      <template>
+        <li>
+          <span class="wk" data-field="week"></span>
+          <span class="speaker" data-field="speaker"></span>
+          <span class="talk-title" data-field="title"></span>
+          <span class="date" data-field="date"></span>
+        </li>
+      </template>
+    </ol>
+  </main>
+
+  <script src="../../data.js"></script>
+  <script src="../poster.js"></script>
+  <script src="blueprint.js"></script>
+</body>
+</html>
