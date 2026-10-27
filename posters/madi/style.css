@@ -1,0 +1,257 @@
+/* Madi's poster: medieval punk
+   Palette: ink black, butter yellow, cyan.
+   Type: Inter Tight Black + UnifrakturMaguntia for the title clash,
+   Archivo for everything you actually have to read. */
+
+:root {
+  --ink: #121210;
+  --gold: #f6d58e;
+  --gold-dim: rgba(246, 213, 142, 0.38);
+  --cyan: #5bc7ea;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  background: #050505;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.defs { position: absolute; width: 0; height: 0; }
+
+.visually-hidden {
+  position: absolute; width: 1px; height: 1px; overflow: hidden;
+  clip: rect(0 0 0 0); white-space: nowrap;
+}
+
+/* ---------- Poster sheet ---------- */
+
+.poster {
+  position: relative;
+  width: 800px;
+  height: 1100px;
+  padding: 26px;
+  overflow: hidden;
+  background: var(--ink);
+  color: var(--gold);
+  font-family: "Archivo", sans-serif;
+  zoom: var(--scale, 1);   /* set by the script in index.html */
+}
+
+/* Film grain */
+.poster::after {
+  content: "";
+  position: absolute; inset: 0; z-index: 7;
+  pointer-events: none;
+  opacity: 0.3;
+  mix-blend-mode: screen;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 1.4 -0.55'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Dust specks */
+.poster::before {
+  content: "";
+  position: absolute; inset: 0; z-index: 5;
+  pointer-events: none;
+  opacity: 0.22;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='d'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.55' numOctaves='3' seed='4'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -9 4.6'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23d)'/%3E%3C/svg%3E");
+}
+
+/* ---------- Ornamental frame (rubbed off) ---------- */
+
+.frame {
+  position: relative;
+  height: 100%;
+  padding: 34px;
+}
+
+.frame::before {
+  content: "";
+  position: absolute; inset: 0;
+  pointer-events: none;
+  background-color: var(--ink);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='34' height='34' viewBox='0 0 34 34'%3E%3Cg fill='%23f6d58e'%3E%3Cpath d='M17 4c3 4 3 7 0 10c-3-3-3-6 0-10zM17 30c-3-4-3-7 0-10c3 3 3 6 0 10zM4 17c4-3 7-3 10 0c-3 3-6 3-10 0zM30 17c-4 3-7 3-10 0c3-3 6-3 10 0z'/%3E%3Ccircle cx='17' cy='17' r='2.2'/%3E%3Ccircle cx='0' cy='0' r='2.6'/%3E%3Ccircle cx='34' cy='0' r='2.6'/%3E%3Ccircle cx='0' cy='34' r='2.6'/%3E%3Ccircle cx='34' cy='34' r='2.6'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: 34px 34px;
+  outline: 2px solid var(--gold);
+  outline-offset: 6px;
+  filter: url(#wear);
+}
+
+.panel {
+  position: relative; z-index: 1;
+  height: 100%;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 290px 1fr;
+  background: var(--ink);
+  border: 2px solid var(--gold);
+  box-shadow: inset 0 0 0 6px var(--ink), inset 0 0 0 7px var(--gold);
+}
+
+/* Blotchy, uneven ink */
+.panel::after {
+  content: "";
+  position: absolute; inset: 0; z-index: 6;
+  pointer-events: none;
+  mix-blend-mode: multiply;
+  opacity: 0.2;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='500' height='500'%3E%3Cfilter id='b'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.012' numOctaves='3' seed='2'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -3 1.2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23b)'/%3E%3C/svg%3E");
+}
+
+/* ---------- Knight plate ---------- */
+
+.plate {
+  position: relative;
+  overflow: hidden;
+  border-right: 2px solid var(--gold);
+}
+
+.knight {
+  position: absolute;
+  bottom: -97px;
+  left: 50%;
+  width: 775px;
+  transform: translateX(-51%);
+}
+
+.bubble {
+  position: absolute; z-index: 3;
+  left: 118px; top: 18px;
+  width: 158px;
+  transform: rotate(-5deg);
+  filter: url(#rough);
+}
+
+.bubble path {
+  fill: var(--ink);
+  stroke: var(--cyan);
+  stroke-width: 3.5;
+  stroke-linejoin: round;
+}
+
+.bubble text {
+  font-family: "UnifrakturMaguntia", serif;
+  font-size: 25px;
+  fill: var(--gold);
+}
+
+/* ---------- Type column ---------- */
+
+.col {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 26px 26px 22px;
+}
+
+.label {
+  margin: 0;
+  font-family: "Archivo", sans-serif;
+  font-weight: 800;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.kicker { color: var(--cyan); }
+
+/* Heavy grotesk with blackletter letters swapped in */
+.title,
+.who {
+  font-family: "Inter Tight", sans-serif;
+  font-weight: 900;
+  letter-spacing: -0.055em;
+  text-transform: uppercase;
+}
+
+.title {
+  margin: 16px 0 0;
+  font-size: 96px;
+  line-height: 1;
+}
+
+.title > span { display: block; }
+.title > span + span { margin-top: -0.06em; }
+.title .l2 { padding-left: 30px; }
+.title .l3 { padding-left: 4px; }
+
+.bl {
+  font-family: "UnifrakturMaguntia", serif;
+  font-weight: 400;
+  letter-spacing: 0;
+  font-size: 1.24em;
+  line-height: 0;
+  vertical-align: -0.02em;
+  margin: 0 0.03em;
+}
+
+.distress { filter: url(#distress); }
+
+.blurb {
+  margin: 14px 0 0;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+/* Next up */
+.hero {
+  margin-top: 20px;
+  padding: 12px 0;
+  border-top: 2px solid var(--gold);
+  border-bottom: 1px solid var(--gold);
+}
+
+.who {
+  margin: 4px 0 6px;
+  font-size: 76px;
+  line-height: 0.85;
+}
+
+/* First letter of the speaker's name goes blackletter, whoever it is */
+.who::first-letter {
+  font-family: "UnifrakturMaguntia", serif;
+  font-weight: 400;
+  letter-spacing: -0.04em;
+  font-size: 1.15em;
+}
+
+.meta { margin: 0; font-size: 14px; }
+.meta em { font-style: normal; font-weight: 800; color: var(--cyan); }
+
+/* Schedule */
+.talks {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0 0;
+  font-size: 12px;
+}
+
+.talks li {
+  display: grid;
+  grid-template-columns: 44px 66px 1fr;
+  gap: 6px;
+  padding: 4px 0;
+  border-bottom: 1px solid var(--gold-dim);
+}
+
+.talks .speaker { font-weight: 800; text-transform: uppercase; }
+
+/* poster.js adds these based on today's date */
+.talks li.past { opacity: 0.38; }
+.talks li.next { color: var(--cyan); }
+
+.foot {
+  margin-top: auto;
+  padding-top: 10px;
+  display: flex;
+  justify-content: space-between;
+  color: var(--cyan);
+}
