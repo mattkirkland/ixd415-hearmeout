@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hear Me Out poster: Rainy Desktop</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Archivo:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!--
+    Rainy Desktop: an old-school desktop with rain-on-glass wallpaper and a
+    few windows open on it. Everything decorative is aria-hidden. The content
+    still comes from ../../data.js through poster.js.
+  -->
+
+  <main class="desktop rainy">
+
+    <div class="fx" aria-hidden="true">
+      <span class="leaf" style="width:140px;height:480px;left:30%;top:80px;background:#2f8a10;transform:rotate(18deg)"></span>
+      <span class="leaf" style="width:220px;height:140px;left:50%;top:420px;background:#e6ff7a;transform:rotate(-30deg)"></span>
+      <span class="leaf" style="width:160px;height:420px;left:-4%;top:700px;background:#1e6a06;transform:rotate(-10deg)"></span>
+      <div class="glass"></div>
+      <div class="rain"></div>
+      <svg class="star" style="left:6%;top:330px" viewBox="0 0 24 24"><path d="M12 0C13 9 15 11 24 12C15 13 13 15 12 24C11 15 9 13 0 12C9 11 11 9 12 0Z" fill="currentColor"/></svg>
+      <svg class="star" style="left:90%;top:470px;width:16px" viewBox="0 0 24 24"><path d="M12 0C13 9 15 11 24 12C15 13 13 15 12 24C11 15 9 13 0 12C9 11 11 9 12 0Z" fill="currentColor"/></svg>
+      <span class="kao" style="left:8%;top:410px">ฅ^•ﻌ•^ฅ</span>
+    </div>
+
+    <div class="layer">
+
+      <div class="icons" aria-hidden="true">
+        <span class="icon"><i></i>My Talk</span>
+        <span class="icon"><i></i>Hear Me Out</span>
+        <span class="icon"><i></i>notes.txt</span>
+      </div>
+
+      <section class="win title-win">
+        <div class="titlebar" aria-hidden="true"><span class="orb"></span><span class="grow">Hear Me Out</span><span class="btn">_</span><span class="btn">□</span><span class="btn x">×</span></div>
+        <div class="body rainy">
+          <div class="fx" aria-hidden="true">
+            <span class="leaf" style="width:200px;height:120px;left:50%;top:40px;background:#e6ff7a;transform:rotate(-30deg)"></span>
+            <div class="glass"></div>
+            <div class="rain"></div>
+            <svg class="star" style="left:86%;top:24px" viewBox="0 0 24 24"><path d="M12 0C13 9 15 11 24 12C15 13 13 15 12 24C11 15 9 13 0 12C9 11 11 9 12 0Z" fill="currentColor"/></svg>
+          </div>
+          <header class="copy">
+            <p class="kicker" data-series="course"></p>
+            <h1 class="chrome" data-series="title"></h1>
+            <p class="subtitle" data-series="subtitle"></p>
+          </header>
+        </div>
+      </section>
+
+      <section class="win olive presenter">
+        <div class="titlebar"><span class="orb" aria-hidden="true"></span><h2 class="grow">Now Presenting</h2><span class="btn" aria-hidden="true">_</span><span class="btn x" aria-hidden="true">×</span></div>
+        <div class="now">
+          <span class="label">Next up</span>
+          <span class="talk"><span data-next="speaker"></span>: <span data-next="title"></span></span>
+          <span data-next="date" data-format="long"></span>
+          <div class="progress" aria-hidden="true"><span></span></div>
+        </div>
+        <div class="controls" aria-hidden="true"><span class="play">▶</span><span class="small"></span><span class="small"></span><span class="vol"></span></div>
+      </section>
+
+      <section class="win dialog">
+        <div class="titlebar"><h2 class="grow">Convince us</h2><span class="btn x" aria-hidden="true">×</span></div>
+        <div class="body">
+          <span class="info" aria-hidden="true">i</span>
+          <p class="blurb" data-series="blurb"></p>
+          <span class="ok" aria-hidden="true">OK</span>
+        </div>
+      </section>
+
+      <section class="win olive lineup">
+        <div class="titlebar"><span class="orb" aria-hidden="true"></span><h2 class="grow">Lineup: <span data-series="term"></span></h2><span class="btn" aria-hidden="true">_</span><span class="btn" aria-hidden="true">□</span><span class="btn x" aria-hidden="true">×</span></div>
+        <ol class="talks" data-talks>
+          <template>
+            <li>
+              <span class="speaker" data-field="speaker"></span>
+              <span class="title" data-field="title"></span>
+              <span class="date" data-field="date"></span>
+            </li>
+          </template>
+        </ol>
+      </section>
+
+    </div>
+
+    <footer class="taskbar">
+      <span class="start" aria-hidden="true">start</span>
+      <span class="grow"></span>
+      <span><span data-series="when"></span> · <span data-series="where"></span></span>
+    </footer>
+
+  </main>
+
+  <script src="../../data.js"></script>
+  <script src="../poster.js"></script>
+</body>
+</html>

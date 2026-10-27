@@ -1,0 +1,511 @@
+/* Rainy Desktop: Frutiger Aero rain-on-glass wallpaper with XP-style windows. */
+
+:root {
+  --ink: #10300a;
+  --lime: #c8ff3a;
+  --leaf: #3f9a1a;
+  --olive: #4f7a14;
+  --xp-blue: #0a4fd1;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #2c7d0c;
+  font-family: Archivo, "Helvetica Neue", sans-serif;
+  color: var(--ink);
+}
+
+h2 {
+  margin: 0;
+  font: inherit;
+}
+
+/* ---------- Rain on glass ---------- */
+
+.rainy {
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse 30% 50% at 55% 35%, #d9ff6a 0%, rgba(217, 255, 106, 0) 70%),
+    radial-gradient(ellipse 18% 60% at 20% 55%, #3f9a1a 0%, rgba(63, 154, 26, 0) 70%),
+    radial-gradient(ellipse 22% 45% at 80% 60%, #5cbf22 0%, rgba(92, 191, 34, 0) 70%),
+    radial-gradient(ellipse 60% 25% at 50% 0%, #e9f6ff 0%, rgba(233, 246, 255, 0) 80%),
+    linear-gradient(to bottom, #b9dcf0 0%, #8fcf6a 30%, #4fae1e 65%, #2c7d0c 100%);
+}
+
+.rainy > .fx {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+/* blurred leaves behind the glass */
+.leaf {
+  position: absolute;
+  border-radius: 50% 0;
+  filter: blur(14px);
+  opacity: 0.8;
+}
+
+/* reeded, frosted glass */
+.glass {
+  position: absolute;
+  inset: 0;
+  background:
+    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.07) 0 2px, rgba(255, 255, 255, 0) 2px 9px),
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='600' height='600' preserveAspectRatio='none'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.03' numOctaves='2' seed='9' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 0.9 -0.35'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  background-size: auto, 100% 100%;
+  mix-blend-mode: soft-light;
+}
+
+.rain {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(100deg, rgba(255, 255, 255, 0) 0 38px, rgba(255, 255, 255, 0.35) 38px 39px, rgba(255, 255, 255, 0) 39px 77px);
+  -webkit-mask-image: linear-gradient(to bottom, #000, rgba(0, 0, 0, 0.3));
+  mask-image: linear-gradient(to bottom, #000, rgba(0, 0, 0, 0.3));
+}
+
+.star {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  color: #fff;
+  filter: drop-shadow(0 0 6px #fff);
+}
+
+.kao {
+  position: absolute;
+  color: #fff;
+  font-size: 18px;
+  text-shadow: 0 0 8px #fff;
+  transform: rotate(-8deg);
+  white-space: nowrap;
+}
+
+/* ---------- Desktop ---------- */
+
+.desktop {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 28px 22px 0;
+}
+
+.layer {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  margin-bottom: 26px;
+}
+
+.icons {
+  grid-column: 1 / 3;
+  grid-row: 1 / 3;
+  display: grid;
+  gap: 22px;
+  align-content: start;
+  padding-top: 10px;
+}
+
+.icon {
+  display: grid;
+  justify-items: center;
+  gap: 4px;
+  font-size: 11px;
+  color: #fff;
+  text-shadow: 0 1px 2px #000;
+  text-align: center;
+}
+
+.icon i {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: radial-gradient(circle at 35% 30%, #fff 0 12%, var(--lime) 40%, var(--leaf) 100%);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+}
+
+.icon:nth-child(2) i {
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #fff 0 12%, #8fe2ff 40%, var(--xp-blue) 100%);
+}
+
+.icon:nth-child(3) i {
+  border-radius: 4px 14px 4px 4px;
+  background: linear-gradient(#fff, #d8e6f0);
+}
+
+.taskbar {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: auto -22px 0;
+  padding: 6px 12px;
+  color: #fff;
+  font-family: Tahoma, "Segoe UI", sans-serif;
+  font-size: 12px;
+  background: linear-gradient(#5aa82a, #3f8a16 40%, #2f7010);
+}
+
+.start {
+  padding: 4px 16px 4px 12px;
+  border-radius: 0 12px 12px 0;
+  font-weight: bold;
+  font-style: italic;
+  font-size: 15px;
+  background: linear-gradient(#7ed321, var(--leaf));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6);
+}
+
+.grow {
+  flex: 1;
+}
+
+/* ---------- Windows ---------- */
+
+.win {
+  position: relative;
+  border-radius: 10px 10px 6px 6px;
+  overflow: hidden;
+  border: 3px solid var(--frame, var(--xp-blue));
+  box-shadow: 0 20px 50px rgba(0, 40, 0, 0.35);
+  background: #eef3fa;
+  font-family: Tahoma, "Segoe UI", Verdana, sans-serif;
+}
+
+/* green XP theme */
+.win.olive {
+  --frame: var(--olive);
+  --bar: linear-gradient(to bottom, #c6ec7a 0%, #8fc23a 14%, #6ea521 50%, #5d9119 90%, #4a7810 100%);
+  --btn: linear-gradient(#a8d860, #5d9119);
+}
+
+.titlebar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 6px 6px 10px;
+  color: #fff;
+  font-weight: bold;
+  font-size: 15px;
+  text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.35);
+  background: var(--bar, linear-gradient(to bottom, #3c8cff 0%, #0f5ee8 12%, #0a52d8 50%, #0a48c6 90%, #0c3ea8 100%));
+}
+
+.titlebar .grow {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.orb {
+  flex: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #fff 0 15%, var(--lime) 35%, var(--leaf) 100%);
+}
+
+.btn {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 4px;
+  border: 1px solid #fff;
+  font-size: 14px;
+  line-height: 1;
+  background: var(--btn, linear-gradient(#5a9bff, #1f63e6));
+}
+
+.btn.x {
+  background: linear-gradient(#f08a6a, #d6401c);
+}
+
+/* Title window */
+
+.title-win {
+  grid-column: 3 / 13;
+  grid-row: 1;
+}
+
+.title-win .body {
+  padding: 26px 24px 52px;
+}
+
+.copy {
+  position: relative;
+}
+
+.kicker {
+  margin: 0;
+  font-family: Archivo, sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+/* green chrome title */
+.chrome {
+  margin: 18px 0 0;
+  font-family: "DM Serif Display", serif;
+  font-weight: 400;
+  font-size: clamp(48px, 12vw, 96px);
+  line-height: 0.85;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+  background: linear-gradient(to bottom, #f6ffcc 0%, #d4ff4a 35%, #93d400 55%, #5f9a00 80%, var(--lime) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 2px 0 #3f6a00) drop-shadow(0 4px 0 #2f5200) drop-shadow(0 0 14px rgba(210, 255, 80, 0.6));
+}
+
+.subtitle {
+  margin: 8px 0 0;
+  font-family: "DM Serif Display", serif;
+  font-style: italic;
+  font-size: 20px;
+  color: #f3ffd6;
+  text-shadow: 0 1px 3px rgba(0, 40, 0, 0.6);
+}
+
+/* Now Presenting window */
+
+.presenter {
+  grid-column: 1 / 8;
+  grid-row: 2;
+  align-self: start;
+  z-index: 3;
+  margin: -24px 0 0 40px;
+}
+
+.now {
+  display: grid;
+  gap: 4px;
+  padding: 12px 16px;
+  background: #10230c;
+  color: var(--lime);
+  font-size: 13px;
+}
+
+.now .label {
+  color: #8fd45a;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 11px;
+}
+
+.now .talk {
+  font-size: 18px;
+  font-weight: bold;
+  color: #fff;
+}
+
+.progress {
+  height: 6px;
+  margin-top: 4px;
+  border-radius: 3px;
+  background: #2c4a1e;
+  overflow: hidden;
+}
+
+.progress span {
+  display: block;
+  width: 62%;
+  height: 100%;
+  background: linear-gradient(90deg, #e6ff8a, #7ed321);
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  background: linear-gradient(#e2efd4, #b6d39a);
+  border-top: 1px solid #fff;
+}
+
+.play {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 2px solid var(--olive);
+  color: #3a6010;
+  font-size: 18px;
+  background: radial-gradient(circle at 40% 30%, #fff 0 20%, #e6ffb0 45%, #8fc23a 100%);
+}
+
+.small {
+  flex: none;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1px solid var(--olive);
+  background: radial-gradient(circle at 40% 30%, #fff, #b6dc7a);
+}
+
+.vol {
+  flex: none;
+  width: 80px;
+  height: 6px;
+  border-radius: 3px;
+  background: linear-gradient(90deg, #7ed321 70%, #9aa 70%);
+}
+
+/* Convince us dialog */
+
+.dialog {
+  grid-column: 7 / 13;
+  grid-row: 2;
+  align-self: start;
+  z-index: 4;
+  margin-top: 56px;
+}
+
+.dialog .body {
+  display: grid;
+  grid-template-columns: 34px 1fr;
+  gap: 12px;
+  padding: 16px;
+  font-size: 13px;
+  line-height: 1.45;
+  color: #1a2a1a;
+}
+
+.info {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  color: #fff;
+  font-weight: bold;
+  background: radial-gradient(circle at 35% 30%, #8fe2ff, var(--xp-blue));
+}
+
+.blurb {
+  margin: 0;
+}
+
+.ok {
+  grid-column: 2;
+  justify-self: end;
+  padding: 4px 22px;
+  border: 1px solid #2a5fb8;
+  border-radius: 3px;
+  background: linear-gradient(#fff, #dfe8f3);
+}
+
+/* Lineup window */
+
+.lineup {
+  grid-column: 2 / 12;
+  grid-row: 3;
+  margin-top: 26px;
+}
+
+.talks {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  background: #fff;
+  font-size: 14px;
+  color: #1a2a1a;
+  counter-reset: talk;
+}
+
+.talks li {
+  display: grid;
+  grid-template-columns: 28px 76px 1fr 60px;
+  gap: 8px;
+  padding: 6px 14px;
+  border-bottom: 1px solid #e6efdf;
+  counter-increment: talk;
+}
+
+.talks li::before {
+  content: counter(talk);
+  color: #9ab08a;
+}
+
+.talks li:nth-child(even) {
+  background: #f5faf0;
+}
+
+.talks .speaker {
+  font-weight: bold;
+}
+
+.talks .date {
+  color: #5f7a4a;
+  text-align: right;
+}
+
+/* poster.js adds these classes based on today's date */
+.talks li.past {
+  color: #a9b8a0;
+}
+
+.talks li.next {
+  background: linear-gradient(#efffc4, var(--lime));
+  color: var(--ink);
+}
+
+/* ---------- Narrow screens: stack the windows ---------- */
+
+@media (max-width: 600px) {
+  .desktop {
+    padding: 16px 16px 0;
+  }
+
+  .layer {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .icons {
+    display: none;
+  }
+
+  .presenter,
+  .dialog,
+  .lineup {
+    align-self: stretch;
+    margin: 0;
+  }
+
+  .title-win .body {
+    padding: 20px 18px 24px;
+  }
+
+  .talks li {
+    grid-template-columns: 22px 1fr 52px;
+    row-gap: 0;
+  }
+
+  .talks .title {
+    grid-column: 2 / 4;
+    grid-row: 2;
+    font-size: 13px;
+  }
+
+  .taskbar {
+    margin: auto -16px 0;
+  }
+}
