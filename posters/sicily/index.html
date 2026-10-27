@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hear Me Out poster: Sicily</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:ital,wght@0,400;0,800;1,800&family=Yellowtail&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!--
+    Sicily's poster: two-color riso. Chartreuse paper, black + fluoro pink inks,
+    a dithered vintage mic, ghost lettering, and a speckled ink texture.
+
+    Everything about the series (course, term, time, room, blurb) and every talk
+    (date, speaker, title) comes from ../../data.js through ../poster.js.
+    The only hardcoded text is the styled title lettering (which mirrors
+    data-series="title") and the "deck isn't the deliverable" rule from the
+    schedule page.
+  -->
+
+  <!-- Ink texture filters, used from style.css -->
+  <svg class="defs" aria-hidden="true">
+    <!-- heavy: rough edges + speckled, uneven coverage (title) -->
+    <filter id="riso-ink" x="-5%" y="-5%" width="110%" height="110%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.045" numOctaves="2" seed="4" result="warp"/>
+      <feDisplacementMap in="SourceGraphic" in2="warp" scale="3.5" xChannelSelector="R" yChannelSelector="G" result="rough"/>
+      <feTurbulence type="fractalNoise" baseFrequency="0.75" numOctaves="2" seed="9" result="speck"/>
+      <feColorMatrix in="speck" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -3.2 2.55" result="mask"/>
+      <feComposite in="rough" in2="mask" operator="in"/>
+    </filter>
+    <!-- soft: speckle only (blocks, tints, fade) -->
+    <filter id="riso-ink-soft" x="-5%" y="-5%" width="110%" height="110%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="2" seed="2" result="speck"/>
+      <feColorMatrix in="speck" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -2.6 2.2" result="mask"/>
+      <feComposite in="SourceGraphic" in2="mask" operator="in"/>
+    </filter>
+    <!-- fine: light speckle and edge wobble for small type -->
+    <filter id="riso-ink-fine" x="-2%" y="-2%" width="104%" height="104%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.03" numOctaves="2" seed="7" result="warp"/>
+      <feDisplacementMap in="SourceGraphic" in2="warp" scale="1.6" xChannelSelector="R" yChannelSelector="G" result="rough"/>
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="5" result="speck"/>
+      <feColorMatrix in="speck" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -2.4 2.15" result="mask"/>
+      <feComposite in="rough" in2="mask" operator="in"/>
+    </filter>
+    <!-- paper grain -->
+    <filter id="riso-grain">
+      <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" stitchTiles="stitch"/>
+      <feColorMatrix type="matrix" values="0 0 0 0 0.08  0 0 0 0 0.08  0 0 0 0 0.08  1.8 0 0 0 -0.75"/>
+    </filter>
+  </svg>
+
+  <main class="poster">
+
+    <!-- chartreuse runs out into bare paper from the blurb down -->
+    <div class="fade tex-soft" aria-hidden="true"></div>
+
+    <!-- ghost lettering: upside-down, coarse dot tint -->
+    <div class="ghost ghost-top tex-soft" aria-hidden="true"><div class="dots">Hear<br>Me<br>Out</div></div>
+    <div class="ghost ghost-corner tex-soft" aria-hidden="true"><div class="dots">Me</div></div>
+
+    <!-- dithered vintage mic, pink plate -->
+    <img class="mic" src="mic.png" alt="Vintage stage microphone">
+
+
+    <!-- title: black HEAR / OUT with the pink plate peeking out, script "me" over -->
+    <h1 class="title">
+      <span class="visually-hidden" data-series="title"></span>
+      <span class="t hear plate tex" aria-hidden="true">Hear</span>
+      <span class="t hear tex" aria-hidden="true">Hear</span>
+      <span class="t out plate tex" aria-hidden="true">Out</span>
+      <span class="t out tex" aria-hidden="true">Out</span>
+      <span class="me tex" aria-hidden="true">me</span>
+    </h1>
+
+    <!-- small print: course, term, when, where (selection-box tags) -->
+    <p class="tag tag-left"><span data-series="course"></span><i class="hd tl"></i><i class="hd tr"></i><i class="hd bl"></i><i class="hd br"></i></p>
+    <p class="tag tag-right"><span data-series="term"></span> · <span data-series="when"></span> · <span data-series="where"></span><i class="hd tl"></i><i class="hd tr"></i><i class="hd bl"></i><i class="hd br"></i></p>
+
+    <!-- subhead -->
+    <p class="subhead tex-soft"><span data-series="subtitle"></span><i class="hd tl"></i><i class="hd tr"></i><i class="hd bl"></i><i class="hd br"></i></p>
+
+    <!-- blurb: a textured pink highlight layer printed under the text layer -->
+    <p class="blurb blurb-ink tex-soft" aria-hidden="true"><span class="blurb-lead"></span> <strong class="blurb-hl"></strong></p>
+    <p class="blurb"><span class="blurb-lead"></span> <strong class="blurb-last"></strong></p>
+
+    <p class="rule">The deck isn’t the deliverable. You are.</p>
+
+    <!-- the lineup -->
+    <section class="lineup fine">
+      <div class="lineup-head">
+        <h2 class="tex">the lineup</h2>
+        <div class="lineup-rule tex"></div>
+      </div>
+      <div class="talks" data-talks>
+        <template>
+          <div class="talk">
+            <div class="date"><span class="mon" data-field="month"></span><span class="day" data-field="day"></span></div>
+            <div class="who"><span class="name" data-field="speaker"></span><span class="what" data-field="title"></span></div>
+          </div>
+        </template>
+      </div>
+    </section>
+
+    <!-- paper grain over everything -->
+    <svg class="grain" aria-hidden="true" width="900" height="1200"><rect width="900" height="1200" filter="url(#riso-grain)"/></svg>
+
+  </main>
+
+  <script src="../../data.js"></script>
+  <script src="../poster.js"></script>
+  <script>
+    (function () {
+      var data = window.HEAR_ME_OUT;
+      var poster = document.querySelector('.poster');
+
+      // Lineup: two-digit days, "Title TBD" for open slots, two even columns,
+      // and no rule above the first row of each column.
+      var talks = document.querySelectorAll('.talks .talk');
+      var perCol = Math.ceil(talks.length / 2);
+      document.querySelector('.talks').style.gridTemplateRows = 'repeat(' + perCol + ', 58px)';
+      talks.forEach(function (el, i) {
+        var day = el.querySelector('.day');
+        if (day.textContent.length === 1) day.textContent = '0' + day.textContent;
+        var what = el.querySelector('.what');
+        if (what.textContent.trim().toUpperCase() === 'TBD') {
+          what.textContent = 'Title TBD';
+          what.classList.add('tbd');
+        }
+        if (i === 0 || i === perCol) el.classList.add('first');
+      });
+
+      // Blurb: highlight the last sentence. Split it off the shared blurb text.
+      var blurb = (data && data.series.blurb) || '';
+      var cut = blurb.trim().replace(/[.!?]$/, '').search(/[.!?]\s+[^.!?]*$/);
+      var lead = cut === -1 ? '' : blurb.slice(0, cut + 1);
+      var last = cut === -1 ? blurb : blurb.slice(cut + 1).trim();
+      document.querySelectorAll('.blurb-lead').forEach(function (el) { el.textContent = lead; });
+      document.querySelectorAll('.blurb-hl, .blurb-last').forEach(function (el) { el.textContent = last; });
+
+      // Scale the fixed 900x1200 poster down to fit smaller windows (like the viewer).
+      function fit() {
+        var s = Math.min(1, window.innerWidth / 900, window.innerHeight / 1200);
+        poster.style.setProperty('--scale', s);
+      }
+      window.addEventListener('resize', fit);
+      fit();
+    })();
+  </script>
+</body>
+</html>
