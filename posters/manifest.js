@@ -10,5 +10,6 @@
 
 window.POSTERS = [
   { slug: "starter", author: "Matt", title: "Starter" },
-  { slug: "madi", author: "Madi", title: "Hear Ye" }
+  { slug: "madi", author: "Madi", title: "Hear Ye" },
+  { slug: "maya-tabloid", author: "Maya", title: "Cover Story" }
 ];
