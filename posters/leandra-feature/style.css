@@ -1,0 +1,188 @@
+/* Feature Presentation (Leandra)
+   Minimal Swiss film poster on one 8.5 x 11 sheet.
+   Swiss rules followed here: one typeface (Inter Tight, a Helvetica-like
+   grotesk), flush-left / ragged-right text, a 12-column grid with fixed
+   margins, lots of empty space, and only black, white, and one accent.
+   Sized in cqw (1% of the poster's width) so the sheet scales as a whole. */
+
+:root {
+  --black: #0d0b0c;
+  --white: #f3efe9;
+  --grey: #8c8686;
+  --pink: #ff1f8f;
+  /* grid: 4cqw margins, 12 columns, 1.6cqw gutters */
+  --m: 4cqw;
+  --col: calc((100cqw - 2 * var(--m) - 11 * 1.6cqw) / 12);
+  --g: 1.6cqw;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 16px;
+  background: #1d1a1b;
+  font-family: "Inter Tight", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: var(--white);
+}
+
+.poster {
+  container-type: inline-size;
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  width: min(100%, calc((100vh - 32px) * 8.5 / 11));
+  aspect-ratio: 8.5 / 11;
+  background: var(--black);
+  box-shadow: 0 20px 60px rgba(0,0,0,.6);
+}
+.poster > * { position: absolute; }
+
+/* Film grain + a soft vignette, for the cinematic feel */
+.poster::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 50;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 50% 45%, transparent 50%, rgba(0,0,0,.55) 100%),
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.95' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 .5 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  mix-blend-mode: overlay;
+  opacity: .55;
+}
+
+/* ---------- Cast billing across the top ---------- */
+.cast {
+  top: 4cqw; left: var(--m); right: var(--m);
+  margin: 0; padding: 0; list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: .6cqw 1.2cqw;
+  font-size: 1.45cqw;
+  font-weight: 700;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+.cast li.past { color: var(--grey); }
+.cast li.next { color: var(--pink); }
+
+/* ---------- The circle ---------- */
+.circle {
+  z-index: 0;
+  width: 66cqw; height: 66cqw;
+  left: 46cqw; top: 19cqw;
+  border-radius: 50%;
+  background: var(--pink);
+}
+/* thin rings radiating out of it, like sound */
+.waves {
+  z-index: 0;
+  width: 100cqw; height: 100cqw;
+  left: 29cqw; top: 2cqw;
+  border-radius: 50%;
+  background: repeating-radial-gradient(circle, transparent 0 3.4cqw, rgba(243,239,233,.18) 3.4cqw 3.55cqw);
+  -webkit-mask-image: radial-gradient(circle, transparent 33%, #000 34%, #000 60%, transparent 71%);
+          mask-image: radial-gradient(circle, transparent 33%, #000 34%, #000 60%, transparent 71%);
+}
+
+/* ---------- Title ---------- */
+header { z-index: 2; left: var(--m); top: 17cqw; right: var(--m); }
+
+h1 {
+  margin: 0 0 0 -.8cqw;
+  font-weight: 900;
+  font-size: 25cqw;
+  line-height: .78;
+  letter-spacing: -.065em;
+  text-transform: uppercase;
+  color: var(--white);
+}
+h1 .w { display: block; }
+
+.tagline {
+  margin: 4cqw 0 0;
+  width: calc(var(--col) * 5 + var(--g) * 4);
+  font-size: 2.3cqw;
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -.01em;
+}
+
+/* ---------- Next screening (left), facts (right) ---------- */
+.next-up {
+  z-index: 2;
+  left: var(--m);
+  top: 89cqw;
+  width: calc(var(--col) * 7 + var(--g) * 6);
+  padding-top: 1.4cqw;
+  border-top: .25cqw solid var(--white);
+}
+.next-up h2,
+.facts dt {
+  margin: 0;
+  font-size: 1.3cqw;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--pink);
+}
+.next-up p { margin: 0; }
+.next-date { margin-top: .6cqw !important; font-size: 1.8cqw; font-weight: 500; }
+.next-speaker {
+  font-size: 9cqw;
+  font-weight: 900;
+  line-height: .95;
+  letter-spacing: -.05em;
+  text-transform: uppercase;
+}
+.next-title { margin-top: .6cqw !important; font-size: 2.2cqw; font-weight: 500; line-height: 1.15; }
+
+.facts {
+  z-index: 2;
+  margin: 0;
+  right: var(--m);
+  top: 89cqw;
+  width: calc(var(--col) * 4 + var(--g) * 3);
+  padding-top: 1.4cqw;
+  border-top: .25cqw solid var(--white);
+  display: grid;
+  gap: 1.4cqw;
+}
+.facts dd { margin: .3cqw 0 0; font-size: 2.2cqw; font-weight: 700; line-height: 1.1; }
+
+/* ---------- Billing block ---------- */
+footer {
+  z-index: 2;
+  left: var(--m); right: var(--m); bottom: 3.5cqw;
+  padding-top: 1.2cqw;
+  border-top: .12cqw solid rgba(243,239,233,.4);
+  font-size: 1.05cqw;
+  line-height: 1.45;
+  letter-spacing: .03em;
+  text-transform: uppercase;
+  color: rgba(243,239,233,.75);
+}
+footer p { margin: 0; }
+.billing-lead { font-weight: 700; color: var(--white); }
+.billing-lead .em { color: var(--pink); }
+.billing {
+  margin: .5cqw 0; padding: 0; list-style: none;
+  display: flex; flex-wrap: wrap; column-gap: 1.4cqw;
+}
+.billing li { white-space: nowrap; }
+.billing .speaker { font-weight: 700; color: var(--white); }
+.billing li.next .speaker,
+.billing li.next .date { color: var(--pink); }
+.blurb { text-transform: none; letter-spacing: 0; font-size: 1.1cqw; }
+
+/* ---------- Print: one letter page ---------- */
+@page { size: letter; margin: 0; }
+@media print {
+  body { display: block; padding: 0; background: none; min-height: 0; }
+  .poster { width: 8.5in; box-shadow: none; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}
