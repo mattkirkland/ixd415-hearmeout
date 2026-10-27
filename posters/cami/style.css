@@ -7,8 +7,8 @@
    THE GRID
    6 columns, 5cqw margins, 2cqw gutters. Every column is 13.33cqw wide.
      cols 1-4  title
-     cols 5-6  next up
-     footer    course info under the dates, about text under the talk titles
+     cols 5-6  course info at the top, next up at the bottom
+     footer    about text across the full width
      schedule  date col 1, speaker cols 2-3, talk title cols 4-6
    Add #grid to the end of the URL to see the columns.
 
@@ -127,7 +127,13 @@ body {
   content: "\201D"; /* closing quote */
 }
 
-/* Row 1, cols 5-6: next up, at the bottom beside OUT */
+/* Row 1, cols 5-6: course info at the top, next up at the bottom beside OUT */
+
+.course {
+  grid-row: 1;
+  grid-column: 5 / 7;
+  align-self: start;
+}
 
 .next-up {
   grid-row: 1;
@@ -203,23 +209,17 @@ footer {
   color: var(--red);
 }
 
-/* Row 3: one shared footer. Course info under the dates and speakers,
-   the about text starting exactly where the talk titles (and TBDs) start */
+/* Row 3: the about text, stretched across the full width */
 
 footer {
   grid-row: 3;
   grid-column: 1 / 7;
-  align-items: start;
   border-top: 0.6cqw solid var(--ink);
   padding-top: 1.5cqw;
 }
 
-.course {
-  grid-column: 1 / 3;
-}
-
 .blurb {
-  grid-column: 3;
+  grid-column: 1 / -1;
   text-wrap: pretty; /* avoids a lonely last word */
 }
 
