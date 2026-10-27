@@ -32,42 +32,39 @@
       <p class="subtitle" data-series="subtitle"></p>
     </header>
 
-    <section class="cover-story">
-      <p class="exclusive">Exclusive!</p>
-      <p class="tells">This week</p>
-      <h2 class="speaker" data-next="speaker"></h2>
-      <p class="tells">tells all:</p>
-      <p class="headline"><span class="quote" data-next="title"></span></p>
-    </section>
+    <div class="body">
 
-    <div class="burst">
-      <span class="burst-label">Live!</span>
-      <span class="burst-month" data-next="month"></span>
-      <span class="burst-day" data-next="day"></span>
+      <section class="cover-story">
+        <p class="eyebrow"><span class="exclusive">Exclusive</span> <span class="tells">This week</span></p>
+        <h2 class="speaker" data-next="speaker"></h2>
+        <p class="tells">tells all:</p>
+        <p class="headline"><span class="quote" data-next="title"></span></p>
+        <p class="dateline"><span data-next="date" data-format="long"></span></p>
+
+        <div class="plus">
+          <p class="plus-tag">Plus!</p>
+          <p class="blurb" data-series="blurb"></p>
+        </div>
+      </section>
+
+      <aside class="lines">
+        <p class="lines-head">Also inside</p>
+        <ol data-talks>
+          <template>
+            <li>
+              <span class="when" data-field="date"></span>
+              <span class="who" data-field="speaker"></span>
+              <span class="what" data-field="title"></span>
+            </li>
+          </template>
+        </ol>
+      </aside>
+
     </div>
-
-    <aside class="lines">
-      <p class="lines-head">Also inside</p>
-      <ol data-talks>
-        <template>
-          <li>
-            <span class="tag"></span>
-            <span class="who" data-field="speaker"></span>
-            <span class="what" data-field="title"></span>
-            <span class="when" data-field="date"></span>
-          </li>
-        </template>
-      </ol>
-    </aside>
-
-    <section class="plus">
-      <p class="plus-tag">Plus!</p>
-      <p class="blurb" data-series="blurb"></p>
-    </section>
 
     <footer class="strip">
       <p class="where"><span data-series="when"></span><br><span data-series="where"></span></p>
-      <p class="free">Free</p>
+      <div class="burst"><span>Free</span><small>admission</small></div>
       <div class="barcode" aria-hidden="true">
         <div class="bars"></div>
         <span>0 41500 26415 9</span>
