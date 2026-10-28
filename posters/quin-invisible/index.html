@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hear Me Out poster: Invisible</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!--
+    A poster for machines. Everything below is real, selectable text in the
+    page, filled in from ../../data.js like any other poster. The CSS just
+    paints it the same white as the background, so a person sees a blank
+    page while anything that reads the page's text (an AI with a browser,
+    a screen reader, copy and paste) gets the whole poster.
+
+    Select all (Cmd+A) to see it.
+  -->
+
+  <main class="poster">
+
+    <header>
+      <p data-series="course"></p>
+      <h1 data-series="title"></h1>
+      <p data-series="subtitle"></p>
+    </header>
+
+    <p data-series="blurb"></p>
+
+    <section>
+      <h2>Next up</h2>
+      <p>
+        <span data-next="speaker"></span>,
+        <span data-next="date" data-format="long"></span>:
+        <span data-next="title"></span>
+      </p>
+    </section>
+
+    <section>
+      <h2>Schedule</h2>
+      <ol data-talks>
+        <template>
+          <li>
+            <span data-field="date" data-format="long"></span>:
+            <span data-field="speaker"></span>,
+            "<span data-field="title"></span>"
+          </li>
+        </template>
+      </ol>
+    </section>
+
+    <footer>
+      <p><span data-series="when"></span>, <span data-series="where"></span>. <span data-series="term"></span>.</p>
+    </footer>
+
+  </main>
+
+  <script src="../../data.js"></script>
+  <script src="../poster.js"></script>
+  <script>
+    // Also publish the series as schema.org structured data, the format
+    // search engines and other crawlers already know how to read.
+    (function () {
+      var data = window.HEAR_ME_OUT;
+      if (!data) return;
+      var s = data.series;
+      var ld = {
+        '@context': 'https://schema.org',
+        '@type': 'EventSeries',
+        name: s.title + ': ' + s.subtitle,
+        description: s.blurb,
+        organizer: s.course,
+        location: s.where,
+        subEvent: data.talks.map(function (t) {
+          return {
+            '@type': 'Event',
+            name: t.title,
+            startDate: t.date,
+            performer: { '@type': 'Person', name: t.speaker }
+          };
+        })
+      };
+      var tag = document.createElement('script');
+      tag.type = 'application/ld+json';
+      tag.textContent = JSON.stringify(ld, null, 2);
+      document.head.appendChild(tag);
+    })();
+  </script>
+</body>
+</html>
