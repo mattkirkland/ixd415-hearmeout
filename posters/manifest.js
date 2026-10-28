@@ -9,5 +9,6 @@
 // Add your line at the END of the list.
 
 window.POSTERS = [
-  { slug: "starter", author: "Matt", title: "Starter" }
+  { slug: "starter", author: "Matt", title: "Starter" },
+  { slug: "matt-poster", author: "Matt", title: "Hear-me-outs" }
 ];

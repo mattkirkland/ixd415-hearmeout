@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hear Me Out poster: Matt</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Space+Mono:wght@400;700&family=Silkscreen&family=VT323&display=swap">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!--
+    Graphic realism / retro-futurist take, after marathonthegame.com.
+    Black field, neon green type, purple for the live week. Content still
+    comes from ../../data.js via poster.js.
+  -->
+
+  <main class="poster">
+
+    <!-- Top data strip -->
+    <div class="strip">
+      <span class="mark" aria-hidden="true"></span>
+      <span>HMO/415</span>
+      <span data-series="term"></span>
+      <span class="hide-sm">Transmission series</span>
+      <span class="reg" aria-hidden="true"></span>
+    </div>
+
+    <div class="hero">
+      <span class="cross c1" aria-hidden="true"></span>
+      <span class="cross c2" aria-hidden="true"></span>
+
+      <header class="masthead">
+        <p class="kicker" data-series="course"></p>
+        <h1 data-series="title"></h1>
+        <p class="subtitle"><span class="tick" aria-hidden="true"></span><span data-series="subtitle"></span></p>
+      </header>
+
+      <section class="next-up">
+        <h2><span>Next up</span><span>Wk <span data-next="week"></span></span></h2>
+        <p class="nx-date"><span data-next="month"></span><span data-next="day"></span></p>
+        <p class="nx-speaker" data-next="speaker"></p>
+        <p class="nx-title" data-next="title"></p>
+        <p class="nx-foot"><span data-series="when"></span><span aria-hidden="true">&#9654;</span></p>
+      </section>
+    </div>
+
+    <!-- Season progress: one segment per talk -->
+    <div class="progress">
+      <p class="label">Season progress</p>
+      <ol class="segments" data-talks aria-hidden="true">
+        <template>
+          <li><span data-field="week"></span></li>
+        </template>
+      </ol>
+    </div>
+
+    <div class="lower">
+
+      <div class="brief">
+        <p class="label">/ Brief</p>
+        <p class="blurb" data-series="blurb"></p>
+        <span class="hazard" aria-hidden="true"></span>
+      </div>
+
+      <div class="log">
+        <div class="log-head" aria-hidden="true">
+          <span>Wk</span><span>Date</span><span>Speaker</span><span>Topic</span>
+        </div>
+        <ol class="talks" data-talks>
+          <template>
+            <li>
+              <span class="wk" data-field="week"></span>
+              <span class="date"><span data-field="month"></span> <span data-field="day"></span></span>
+              <span class="speaker" data-field="speaker"></span>
+              <span class="title" data-field="title"></span>
+            </li>
+          </template>
+        </ol>
+      </div>
+
+    </div>
+
+    <footer>
+      <p class="when"><span data-series="when"></span><br><span data-series="where"></span></p>
+      <span class="barcode" aria-hidden="true"></span>
+      <p class="eol">End of line</p>
+    </footer>
+
+  </main>
+
+  <!-- Main call to action, running down the right edge -->
+  <aside class="rail">
+    <span class="rail-tag">HMO&#8212;415</span>
+    <p class="rail-cta">Convince us otherwise</p>
+    <span class="rail-arrow" aria-hidden="true">&#9660;</span>
+  </aside>
+
+  <script src="../../data.js"></script>
+  <script src="../poster.js"></script>
+  <script src="cursor.js"></script>
+</body>
+</html>
