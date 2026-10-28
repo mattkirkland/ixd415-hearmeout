@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hear Me Out poster: Aero Desktop</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!--
+    Aero Desktop: a 3:4 poster in the Windows Vista / 7 "Aero" style.
+    Blue sky, green hills, water, and clear glass panels laid out like
+    desktop gadgets. Everything is sized in cqw (percent of the poster's
+    width) so it scales like a print. Decorative bits are aria-hidden.
+    Content comes from ../../data.js through poster.js.
+  -->
+
+  <main class="poster">
+
+    <!-- Scenery: sky, sun, hills, water, a glass water ribbon, a leaf, bubbles -->
+    <div class="scene" aria-hidden="true">
+      <div class="sun"></div>
+      <div class="hill hill-back"></div>
+      <div class="hill hill-front"></div>
+      <div class="water"></div>
+      <svg class="ribbon" viewBox="0 0 1000 300" preserveAspectRatio="none">
+        <defs>
+          <linearGradient id="ribbon-fill" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#ffffff" stop-opacity="0.95"/>
+            <stop offset="0.35" stop-color="#bfefff" stop-opacity="0.7"/>
+            <stop offset="1" stop-color="#1a9ad6" stop-opacity="0.35"/>
+          </linearGradient>
+        </defs>
+        <path d="M0 210 C 140 120, 230 60, 330 110 C 420 160, 400 250, 320 240 C 260 232, 300 150, 400 150 C 560 150, 640 250, 780 210 C 870 184, 930 140, 1000 120 L 1000 150 C 930 170, 870 220, 780 245 C 630 290, 560 190, 410 190 C 330 190, 310 222, 330 226 C 380 236, 380 170, 320 140 C 240 100, 150 170, 0 250 Z" fill="url(#ribbon-fill)" stroke="rgba(255,255,255,0.9)" stroke-width="2"/>
+      </svg>
+      <svg class="leaf" viewBox="0 0 200 120">
+        <defs>
+          <linearGradient id="leaf-fill" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#b6f06a"/>
+            <stop offset="0.5" stop-color="#5cbf22"/>
+            <stop offset="1" stop-color="#2f8a10"/>
+          </linearGradient>
+        </defs>
+        <path d="M6 110 C 30 30, 120 0, 196 8 C 180 70, 110 118, 6 110 Z" fill="url(#leaf-fill)"/>
+        <path d="M6 110 C 70 80, 130 40, 196 8" stroke="#e6ffc0" stroke-width="2" fill="none" opacity="0.8"/>
+        <g stroke="#e6ffc0" stroke-width="1.2" fill="none" opacity="0.6">
+          <path d="M60 82 C 62 62, 72 46, 86 36"/><path d="M100 60 C 104 44, 114 32, 128 24"/>
+          <path d="M60 82 C 80 86, 100 86, 118 80"/><path d="M100 60 C 120 64, 140 62, 156 54"/>
+        </g>
+        <ellipse cx="120" cy="56" rx="8" ry="6" fill="rgba(255,255,255,0.55)" stroke="#fff" stroke-width="1"/>
+        <ellipse cx="150" cy="36" rx="5" ry="4" fill="rgba(255,255,255,0.55)" stroke="#fff" stroke-width="1"/>
+        <ellipse cx="86" cy="76" rx="4" ry="3" fill="rgba(255,255,255,0.55)" stroke="#fff" stroke-width="1"/>
+      </svg>
+      <span class="bubble" style="width:13cqw;left:52%;top:30%"></span>
+      <span class="bubble" style="width:5cqw;left:68%;top:38%"></span>
+      <span class="bubble" style="width:2.4cqw;left:47%;top:44%"></span>
+      <span class="bubble" style="width:3cqw;left:30%;top:79%"></span>
+      <span class="bubble" style="width:1.8cqw;left:36%;top:84%"></span>
+      <span class="bubble" style="width:4cqw;left:62%;top:83%"></span>
+      <span class="bubble" style="width:1.6cqw;left:88%;top:76%"></span>
+    </div>
+
+    <div class="layout">
+
+      <!-- "welcome" panel -->
+      <header class="glass welcome">
+        <div class="hello">
+          <h1 class="headline" data-series="title"></h1>
+          <p class="tagline" data-series="subtitle"></p>
+          <p class="blurb" data-series="blurb"></p>
+        </div>
+        <div class="term">
+          <span class="big" data-series="term"></span>
+          <span class="small" data-series="course"></span>
+        </div>
+      </header>
+
+      <!-- Lineup, like the "Tasks" list -->
+      <section class="glass lineup">
+        <h2 class="panel-title">Lineup</h2>
+        <ol class="talks" data-talks>
+          <template>
+            <li>
+              <span class="buddy" aria-hidden="true"></span>
+              <span class="speaker" data-field="speaker"></span>
+              <span class="date" data-field="date"></span>
+              <span class="title" data-field="title"></span>
+            </li>
+          </template>
+        </ol>
+      </section>
+
+      <!-- Next talk, with a progress bar like the "System" gadget -->
+      <section class="glass presenting">
+        <h2 class="panel-title">Now Presenting</h2>
+        <p class="speaker" data-next="speaker"></p>
+        <p class="talk" data-next="title"></p>
+        <p class="when" data-next="date" data-format="long"></p>
+        <div class="meter">
+          <span class="meter-label">Week <span data-next="week"></span> of <span id="week-count"></span></span>
+          <div class="bar" aria-hidden="true"><span id="week-bar"></span></div>
+        </div>
+      </section>
+
+      <!-- Clock gadget -->
+      <section class="glass clock">
+        <h2 class="panel-title">Clock</h2>
+        <svg class="face" viewBox="0 0 100 100" aria-hidden="true">
+          <defs>
+            <radialGradient id="face-fill" cx="0.4" cy="0.3" r="0.8">
+              <stop offset="0" stop-color="#7fd6ff"/>
+              <stop offset="0.6" stop-color="#1f8ad6"/>
+              <stop offset="1" stop-color="#0b4f9a"/>
+            </radialGradient>
+          </defs>
+          <circle cx="50" cy="50" r="47" fill="url(#face-fill)" stroke="rgba(255,255,255,0.9)" stroke-width="2.5"/>
+          <g stroke="#fff" stroke-width="2" stroke-linecap="round">
+            <line x1="50" y1="8" x2="50" y2="15"/><line x1="92" y1="50" x2="85" y2="50"/>
+            <line x1="50" y1="92" x2="50" y2="85"/><line x1="8" y1="50" x2="15" y2="50"/>
+          </g>
+          <g stroke="#fff" stroke-width="1" opacity="0.7">
+            <line x1="71" y1="13.6" x2="69" y2="17"/><line x1="86.4" y1="29" x2="83" y2="31"/>
+            <line x1="86.4" y1="71" x2="83" y2="69"/><line x1="71" y1="86.4" x2="69" y2="83"/>
+            <line x1="29" y1="86.4" x2="31" y2="83"/><line x1="13.6" y1="71" x2="17" y2="69"/>
+            <line x1="13.6" y1="29" x2="17" y2="31"/><line x1="29" y1="13.6" x2="31" y2="17"/>
+          </g>
+          <!-- 6:00 -->
+          <line x1="50" y1="50" x2="50" y2="72" stroke="#fff" stroke-width="3.2" stroke-linecap="round"/>
+          <line x1="50" y1="50" x2="50" y2="18" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+          <circle cx="50" cy="50" r="3" fill="#fff"/>
+          <ellipse cx="44" cy="28" rx="30" ry="16" fill="#fff" opacity="0.18"/>
+        </svg>
+        <p class="time" data-series="when"></p>
+        <p class="place" data-series="where"></p>
+      </section>
+
+    </div>
+
+    <!-- Glass taskbar -->
+    <footer class="taskbar">
+      <span class="orb" aria-hidden="true"></span>
+      <span class="pins" aria-hidden="true">
+        <span class="pin"><i class="folder"></i></span>
+        <span class="pin"><i class="play"></i></span>
+        <span class="pin"><i class="globe"></i></span>
+      </span>
+      <span class="tray">
+        <span data-series="when"></span>
+        <span data-next="date" data-format="numeric"></span>
+      </span>
+    </footer>
+
+  </main>
+
+  <script src="../../data.js"></script>
+  <script src="../poster.js"></script>
+  <script>
+    // Fill the "Week N of M" meter from the shared data.
+    (function () {
+      var weeks = window.HEAR_ME_OUT && window.HEAR_ME_OUT.weeks;
+      var next = document.querySelector('.talks li.next');
+      if (!weeks || !next) return;
+      document.getElementById('week-count').textContent = weeks.length;
+      document.getElementById('week-bar').style.width = (next.getAttribute('data-week') / weeks.length * 100) + '%';
+    })();
+  </script>
+</body>
+</html>
