@@ -6,7 +6,7 @@
   <title>Hear Me Out poster: Hang In There</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Urbanist:wght@500;600;700;900&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Urbanist:wght@500;700;900&display=swap">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -14,66 +14,48 @@
   <!--
     Hang In There, by Loudon.
 
-    The big letters are built from HEAR_ME_OUT.series.title by cats.js, one line
-    per word, and the cats hang off the letters they fit: the H's crossbar, the
-    inside of the O, and the arm of the T. Everything else is filled in by
-    poster.js from ../../data.js.
+    Nine letters, nine color tiles. tiles.js builds the tiles from
+    HEAR_ME_OUT.series.title and hangs cats off the letters they fit: over the
+    H's crossbar, inside the O, from the arm of the T, and one off the bottom
+    of the grid. Everything else is filled in by poster.js from ../../data.js.
   -->
 
   <main class="poster">
-    <div class="sheet">
+    <h1 class="visually-hidden" data-series="title"></h1>
+    <div class="tiles" aria-hidden="true"></div>
 
-      <header class="top">
-        <p data-series="course"></p>
-        <p data-series="term"></p>
-      </header>
+    <div class="band">
 
-      <div class="stage">
-        <h1 class="visually-hidden" data-series="title"></h1>
-        <div class="headline" aria-hidden="true"></div>
+      <section class="next-up" aria-labelledby="next-up-label">
+        <h2 class="label" id="next-up-label">Next up</h2>
+        <p class="who" data-next="speaker"></p>
+        <p class="when" data-next="date" data-format="long"></p>
+        <p class="what" data-next="title"></p>
+        <p class="meta">
+          <span data-series="course"></span><br>
+          <span data-series="when"></span> · <span data-series="where"></span><br>
+          <span data-series="term"></span>
+        </p>
+      </section>
 
-        <section class="next-up" aria-label="Next talk">
-          <p class="label">Next up</p>
-          <div>
-            <p class="who" data-next="speaker"></p>
-            <p class="when" data-next="date" data-format="long"></p>
-            <p class="what" data-next="title"></p>
-          </div>
-        </section>
-      </div>
-
-      <div class="bottom">
-
-        <section class="about">
-          <p class="subtitle" data-series="subtitle"></p>
-          <p class="blurb" data-series="blurb"></p>
-          <p class="where">
-            <span data-series="when"></span><br>
-            <span data-series="where"></span>
-          </p>
-        </section>
-
-        <section class="lineup">
-          <h2>The lineup</h2>
-          <ol data-talks>
-            <template>
-              <li>
-                <span class="date" data-field="date"></span>
-                <span class="speaker" data-field="speaker"></span>
-                <span class="title" data-field="title"></span>
-              </li>
-            </template>
-          </ol>
-        </section>
-
-      </div>
+      <section class="lineup" aria-labelledby="lineup-label">
+        <h2 class="visually-hidden" id="lineup-label">The lineup</h2>
+        <ol data-talks>
+          <template>
+            <li>
+              <span class="date" data-field="date"></span>
+              <span class="speaker" data-field="speaker"></span>
+              <span class="title" data-field="title"></span>
+            </li>
+          </template>
+        </ol>
+      </section>
 
     </div>
-    <div class="grain" aria-hidden="true"></div>
   </main>
 
   <script src="../../data.js"></script>
-  <script src="cats.js"></script>
+  <script src="tiles.js"></script>
   <script src="../poster.js"></script>
 </body>
 </html>

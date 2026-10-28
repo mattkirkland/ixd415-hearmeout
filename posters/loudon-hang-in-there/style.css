@@ -1,241 +1,88 @@
-/* Hang In There, by Loudon.
-   A 2:3 poster that scales to fit the window. Everything is sized in cqw
-   (percent of the poster's width), so it keeps its proportions at any size. */
-
-:root {
-  --red: #a8402f;      /* muted brick */
-  --red-dark: #93372a;
-  --ink: #140908;      /* near-black letters: 3.2:1 on --red */
-  --cream: #f3e8d6;    /* small text and cats: 5:1 on --red, 16:1 on --ink */
-  --margin: 6cqw;
-}
+/* Hang In There: nine flat color tiles over a black band. */
 
 * { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; }
+body { display: flex; background: #0d0d0d; }
+p, h1, h2, ol { margin: 0; }
+ol { list-style: none; padding: 0; }
 
-html, body {
-  margin: 0;
-  height: 100%;
+:root {
+  --ink: #111;
+  --cream: #fff4e0;
+  --yellow: #ffd400;
+  --pink: #ff9ccf;
 }
 
-body {
-  display: flex;
-  background: #0d0606;
-  font-family: Urbanist, "Avenir Next", Avenir, system-ui, sans-serif;
-  color: var(--cream);
-}
-
+/* A 2:3 sheet that fits the window, but never narrower than 500px so the
+   small type stays readable (and grows when the browser is zoomed). */
 .poster {
   container-type: inline-size;
   position: relative;
   overflow: hidden;
-  /* Fits the window, but never below 500px, so browser zoom still makes the
-     text bigger (the page scrolls instead). margin: auto centers it without
-     cutting off the top when it's taller than the window. */
   width: max(min(100vw, 100vh * 2 / 3), 500px);
   aspect-ratio: 2 / 3;
   margin: auto;
   flex-shrink: 0;
-  background:
-    radial-gradient(120% 80% at 50% 25%, #b1462f 0%, var(--red) 45%, var(--red-dark) 100%);
+  background: var(--ink);
+  color: var(--cream);
+  font-family: Urbanist, "Avenir Next", Avenir, system-ui, sans-serif;
 }
-
-/* The padding lives here, not on .poster, so cqw always means the full poster width */
-.sheet {
-  height: 100%;
-  padding: var(--margin);
-  display: flex;
-  flex-direction: column;
-  gap: 3cqw;
-}
-
-.poster p { margin: 0; }
 
 .visually-hidden {
-  position: absolute;
-  width: 1px; height: 1px;
-  overflow: hidden;
-  clip: rect(0 0 0 0);
-  white-space: nowrap;
+  position: absolute; width: 1px; height: 1px;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap;
 }
 
-/* Top line: course and term */
+/* ---- The tiles: a 3 x 3 square grid filling the top two thirds ---- */
 
-.top {
-  position: relative;
-  z-index: 3;
-  display: flex;
-  justify-content: space-between;
-  font-size: 2cqw;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
+.tiles { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); grid-auto-rows: 33.334cqw; }
+.tile { display: grid; min-width: 0; place-items: center; background: var(--bg); color: var(--fg); }
+.tile > span { position: relative; display: block; font-size: 30cqw; font-weight: 900; line-height: .7; }
 
-/* The big letters, with Next up in the space to the right of ME */
-
-.stage {
-  position: relative;
-}
-
-.headline {
-  position: relative;
-  z-index: 1;
-  margin: 0;
-  font-size: 35cqw;     /* HEAR fills the width between the margins */
-  font-weight: 900;
-  line-height: 1;
-  color: var(--ink);
-}
-
-.headline .line {
-  display: block;
-  height: 0.7em;        /* cap height, so lines stack on the letters, not the font box */
-  line-height: 0.7em;
-  margin-bottom: 0.08em;
-  margin-left: -0.06em; /* pulls the stems flush with the margin */
-  isolation: isolate;   /* lets cat backs sit behind the letters */
-  white-space: nowrap;
-}
-
-.headline .line:last-child { margin-bottom: 0; }
-
-.headline .letter {
-  position: relative;
-  display: inline-block;
-}
+/* ---- Cats ----
+   Each drawing is 300 x 1000 units with x = 0 at the cat's middle and y = 0 on
+   the edge it holds on to, 30% of the way down, so left/top place that point. */
 
 .cat {
   position: absolute;
-  left: 0;
-  top: var(--cap-top, 0);
-  height: 0.8em;
-  overflow: visible;
+  display: block;
+  aspect-ratio: 3 / 10;
+  transform: translate(-50%, -30%);
   pointer-events: none;
+  z-index: 2;
 }
-
-.cat-back { z-index: -1; }
-
+.cat svg { display: block; width: 100%; height: 100%; overflow: visible; }
 .cat .fur { fill: var(--cream); }
 .cat .tail { fill: none; stroke: var(--cream); stroke-width: 34; stroke-linecap: round; }
 .cat .face { fill: var(--ink); }
-.cat .whiskers,
-.cat .toes { fill: none; stroke: var(--ink); stroke-width: 7; stroke-linecap: round; }
+.cat .lines { fill: none; stroke: var(--ink); stroke-width: 7; stroke-linecap: round; }
 
-/* Spans the second line exactly: label on the cap line, last line on the baseline */
-.next-up {
+/* ---- The band: next talk on the left, the lineup on the right ---- */
+
+.band {
   position: absolute;
-  z-index: 3;
-  right: 0;
-  top: calc(35cqw * 0.78);
-  height: calc(35cqw * 0.7);
-  width: 31cqw;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.next-up .label {
-  font-size: 2cqw;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-.next-up .who {
-  font-size: 7cqw;
-  font-weight: 700;
-  line-height: 1;
-}
-
-.next-up .when,
-.next-up .what {
-  margin-top: 1cqw;
-  font-size: 2.6cqw;
-  font-weight: 500;
-  line-height: 1.3;
-}
-
-/* Bottom: about on the left, the lineup in the bottom-right corner */
-
-.bottom {
-  position: relative;
-  z-index: 3;
-  margin-top: auto;
+  left: 0; right: 0; bottom: 0;
+  height: 50cqw;
+  padding: 6cqw 5cqw 5cqw;
   display: grid;
-  grid-template-columns: 30cqw 1fr;
+  grid-template-columns: 36cqw 1fr;
   gap: 5cqw;
   align-items: end;
 }
 
-.about .subtitle {
-  font-size: 2cqw;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-.about .blurb {
-  margin-top: 1.5cqw;
-  font-size: 2.3cqw;
-  font-weight: 500;
-  line-height: 1.4;
-}
-
-.about .where {
-  margin-top: 2.5cqw;
-  font-size: 2.3cqw;
-  font-weight: 700;
-  line-height: 1.4;
-}
-
-.lineup h2 {
-  margin: 0 0 1cqw;
-  padding-bottom: 1cqw;
-  border-bottom: 0.25cqw solid var(--cream);
-  font-size: 2cqw;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-.lineup ol {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
+.label { font-size: 1.8cqw; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--yellow); }
+.who { margin-top: 1cqw; font-size: 7.5cqw; font-weight: 900; line-height: .9; color: var(--pink); }
+.when { margin-top: 1.5cqw; font-size: 2.4cqw; font-weight: 700; }
+.what { margin-top: .5cqw; font-size: 1.85cqw; font-weight: 500; line-height: 1.3; }
+.meta { margin-top: 3cqw; font-size: 1.75cqw; font-weight: 500; line-height: 1.45; }
 
 .lineup li {
   display: grid;
-  grid-template-columns: 6.5cqw 8.5cqw 1fr;
-  gap: 1.2cqw;
-  padding: 0.3cqw 0;
-  font-size: 1.9cqw;
+  grid-template-columns: 6cqw 8cqw 1fr;
+  gap: 1cqw;
+  font-size: 1.7cqw;
   font-weight: 500;
-  line-height: 1.25;
-  font-variant-numeric: tabular-nums;
+  line-height: 1.45;
 }
-
 .lineup .speaker { font-weight: 700; }
-
-/* poster.js marks each talk past / next / upcoming. Past talks drop to a lighter
-   weight instead of fading, so they keep full contrast. */
-.lineup li.past .speaker { font-weight: 500; }
-
-.lineup li.next {
-  margin: 0 -1cqw;
-  padding: 0.3cqw 1cqw;
-  background: var(--cream);
-  color: var(--ink);
-}
-
-/* Print grain over the whole poster, under the small text */
-
-.grain {
-  position: absolute;
-  inset: 0;
-  z-index: 2;
-  pointer-events: none;
-  opacity: 0.22;
-  mix-blend-mode: multiply;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -1.6 1.1'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-}
+.lineup li.next { color: var(--yellow); }
