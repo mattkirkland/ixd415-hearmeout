@@ -14,5 +14,6 @@ window.POSTERS = [
   { slug: "tori-blueprint", author: "Tori", title: "Blueprint" },
   { slug: "posters-saj", author: "Saj", title: "Aero Desktop" },
   { slug: "maya-tabloid", author: "Maya", title: "Cover Story" },
-  { slug: "cami", author: "Cami", title: "Cami" }
+  { slug: "cami", author: "Cami", title: "Cami" },
+  { slug: "sicily", author: "Sicily", title: "Riso" }
 ];
