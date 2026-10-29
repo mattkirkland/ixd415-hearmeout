@@ -27,7 +27,7 @@ window.HEAR_ME_OUT = {
     { week: 2,  date: "2026-09-02", speaker: null,      title: null,  book: "Maya" },
     { week: 3,  date: "2026-09-09", speaker: "Maya",    title: "The Kardashians are marketing geniuses", book: "Perry" },
     { week: 4,  date: "2026-09-16", speaker: "Perry",   title: "Yoga is more than stretching", book: "Saj" },
-    { week: 5,  date: "2026-09-23", speaker: "Saj",     title: "TBD", book: "Quin" },
+    { week: 5,  date: "2026-09-23", speaker: "Saj",     title: "Powerpoint Deserves a Glow Up", book: "Quin" },
     { week: 6,  date: "2026-09-30", speaker: "Quin",    title: "AI is an Art Revolution", book: "Cami" },
     { week: 7,  date: "2026-10-07", speaker: "Cami",    title: "Halloween is the best holiday", book: "Matt" },
     { week: 8,  date: "2026-10-14", speaker: null,      title: null,  book: null,      note: "No class" },
