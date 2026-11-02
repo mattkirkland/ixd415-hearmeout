@@ -16,5 +16,6 @@ window.POSTERS = [
   { slug: "maya-tabloid", author: "Maya", title: "Cover Story" },
   { slug: "cami", author: "Cami", title: "Cami" },
   { slug: "sicily", author: "Sicily", title: "Riso" },
-  { slug: "loudon-hang-in-there", author: "Loudon", title: "Hang In There" }
+  { slug: "loudon-hang-in-there", author: "Loudon", title: "Hang In There" },
+  { slug: "matt-poster", author: "Matt", title: "Hear-me-outs" }
 ];
