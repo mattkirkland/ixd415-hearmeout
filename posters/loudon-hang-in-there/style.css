@@ -1,0 +1,88 @@
+/* Hang In There: nine flat color tiles over a black band. */
+
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; }
+body { display: flex; background: #0d0d0d; }
+p, h1, h2, ol { margin: 0; }
+ol { list-style: none; padding: 0; }
+
+:root {
+  --ink: #111;
+  --cream: #fff4e0;
+  --yellow: #ffd400;
+  --pink: #ff9ccf;
+}
+
+/* A 2:3 sheet that fits the window, but never narrower than 500px so the
+   small type stays readable (and grows when the browser is zoomed). */
+.poster {
+  container-type: inline-size;
+  position: relative;
+  overflow: hidden;
+  width: max(min(100vw, 100vh * 2 / 3), 500px);
+  aspect-ratio: 2 / 3;
+  margin: auto;
+  flex-shrink: 0;
+  background: var(--ink);
+  color: var(--cream);
+  font-family: Urbanist, "Avenir Next", Avenir, system-ui, sans-serif;
+}
+
+.visually-hidden {
+  position: absolute; width: 1px; height: 1px;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap;
+}
+
+/* ---- The tiles: a 3 x 3 square grid filling the top two thirds ---- */
+
+.tiles { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); grid-auto-rows: 33.334cqw; }
+.tile { display: grid; min-width: 0; place-items: center; background: var(--bg); color: var(--fg); }
+.tile > span { position: relative; display: block; font-size: 30cqw; font-weight: 900; line-height: .7; }
+
+/* ---- Cats ----
+   Each drawing is 300 x 1000 units with x = 0 at the cat's middle and y = 0 on
+   the edge it holds on to, 30% of the way down, so left/top place that point. */
+
+.cat {
+  position: absolute;
+  display: block;
+  aspect-ratio: 3 / 10;
+  transform: translate(-50%, -30%);
+  pointer-events: none;
+  z-index: 2;
+}
+.cat svg { display: block; width: 100%; height: 100%; overflow: visible; }
+.cat .fur { fill: var(--cream); }
+.cat .tail { fill: none; stroke: var(--cream); stroke-width: 34; stroke-linecap: round; }
+.cat .face { fill: var(--ink); }
+.cat .lines { fill: none; stroke: var(--ink); stroke-width: 7; stroke-linecap: round; }
+
+/* ---- The band: next talk on the left, the lineup on the right ---- */
+
+.band {
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 50cqw;
+  padding: 6cqw 5cqw 5cqw;
+  display: grid;
+  grid-template-columns: 36cqw 1fr;
+  gap: 5cqw;
+  align-items: end;
+}
+
+.label { font-size: 1.8cqw; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--yellow); }
+.who { margin-top: 1cqw; font-size: 7.5cqw; font-weight: 900; line-height: .9; color: var(--pink); }
+.when { margin-top: 1.5cqw; font-size: 2.4cqw; font-weight: 700; }
+.what { margin-top: .5cqw; font-size: 1.85cqw; font-weight: 500; line-height: 1.3; }
+.meta { margin-top: 3cqw; font-size: 1.75cqw; font-weight: 500; line-height: 1.45; }
+
+.lineup li {
+  display: grid;
+  grid-template-columns: 6cqw 8cqw 1fr;
+  gap: 1cqw;
+  font-size: 1.7cqw;
+  font-weight: 500;
+  line-height: 1.45;
+}
+.lineup .speaker { font-weight: 700; }
+.lineup li.next { color: var(--yellow); }

@@ -35,8 +35,8 @@ window.HEAR_ME_OUT = {
     { week: 10, date: "2026-10-28", speaker: "Madi",    title: "You're Probably Someone's Worst Customer", book: "Leandra" },
     { week: 11, date: "2026-11-04", speaker: "Leandra", title: "TBD", book: "Alex" },
     { week: 12, date: "2026-11-11", speaker: "Alex",    title: "TBD", book: "Loudon" },
-    { week: 13, date: "2026-11-18", speaker: "Loudon",  title: "TBD", book: "Sicily" },
-    { week: 14, date: "2026-11-25", speaker: "Sicily",  title: "TBD", book: "Tori" },
+    { week: 13, date: "2026-11-18", speaker: "Loudon, Sicily",  title: "TBD", book: "Sicily" },
+    { week: 14, date: "2026-11-25", speaker: "Bye Week",  title: "TBD", book: "Tori" },
     { week: 15, date: "2026-12-02", speaker: "Tori",    title: "TBD", book: "Nathan" },
     { week: 16, date: "2026-12-09", speaker: "Nathan",  title: "TBD", book: "Back to Matt" }
   ]
