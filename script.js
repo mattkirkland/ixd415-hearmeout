@@ -178,9 +178,22 @@ function showCountdown() {
   el.textContent = 'All presentations are done for the semester.';
 }
 
+// Give every week whose date is before today the "past" class.
+// Today's own class still counts as upcoming until the day is over.
+function dimPastWeeks() {
+  var today = getToday();
+  var weeks = getScheduleRows();
+  for (var i = 0; i < weeks.length; i++) {
+    if (parseScheduleDate(weeks[i].date) < today) {
+      weeks[i].row.classList.add('past');
+    }
+  }
+}
+
 document.addEventListener('DOMContentLoaded', function () {
   renderSchedule();
   highlightCurrentWeek();
   showUpNext();
   showCountdown();
+  dimPastWeeks();
 });

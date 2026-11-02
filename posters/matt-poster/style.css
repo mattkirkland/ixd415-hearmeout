@@ -1,0 +1,513 @@
+/* Hear Me Out: graphic realism, after marathonthegame.com.
+   Black field, neon green type, purple for the live week, mono data,
+   chamfered panels. Display type scales off --u (1% of the viewport
+   width, capped); reading text is clamped so it stays comfortable. */
+
+:root {
+  --void: #000;
+  --surface: #1c1c1c;
+  --neon: #c0fe04;
+  --purple: #5200ff;
+  --signal: #f24723;
+  --mute: #717171;
+
+  --u: calc(min(100vw, 1800px) / 100);
+  --rail: max(56px, calc(var(--u) * 6));
+
+  --display: "Archivo", "Helvetica Neue", Arial, sans-serif;
+  --mono: "Space Mono", ui-monospace, Menlo, monospace;
+  --pixel: "Silkscreen", "Space Mono", monospace;
+  /* Videotext labels: uses PF Videotext if it's installed, else VT323 */
+  --video: "PF Videotext", "PFVideotext", "VT323", "Space Mono", monospace;
+  --small: clamp(10px, calc(var(--u) * 0.8), 13px);
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--void);
+  color: var(--neon);
+  font-family: var(--display);
+  -webkit-font-smoothing: antialiased;
+}
+
+p, h1, h2, ol { margin: 0; }
+
+::selection { background: var(--purple); color: var(--neon); }
+
+/* ---------- Page ---------- */
+
+.poster {
+  position: relative;
+  min-height: 100vh;
+  margin-right: var(--rail);
+  padding: max(24px, calc(var(--u) * 3.5)) max(20px, calc(var(--u) * 4.5));
+  display: flex;
+  flex-direction: column;
+  /* crop marks in the four corners */
+  --m: max(10px, calc(var(--u) * 1.4));
+  --l: max(14px, calc(var(--u) * 1.6));
+  --c: var(--neon);
+  background-image:
+    linear-gradient(var(--c), var(--c)), linear-gradient(var(--c), var(--c)),
+    linear-gradient(var(--c), var(--c)), linear-gradient(var(--c), var(--c)),
+    linear-gradient(var(--c), var(--c)), linear-gradient(var(--c), var(--c)),
+    linear-gradient(var(--c), var(--c)), linear-gradient(var(--c), var(--c));
+  background-size:
+    var(--l) 1px, 1px var(--l), var(--l) 1px, 1px var(--l),
+    var(--l) 1px, 1px var(--l), var(--l) 1px, 1px var(--l);
+  background-position:
+    var(--m) var(--m), var(--m) var(--m),
+    calc(100% - var(--m)) var(--m), calc(100% - var(--m)) var(--m),
+    var(--m) calc(100% - var(--m)), var(--m) calc(100% - var(--m)),
+    calc(100% - var(--m)) calc(100% - var(--m)), calc(100% - var(--m)) calc(100% - var(--m));
+  background-repeat: no-repeat;
+}
+
+/* Shared mono label voice */
+.strip, .kicker, .subtitle, .next-up h2, .nx-foot, .label, .log-head,
+.talks .wk, .talks .date, footer, .rail-tag {
+  font-family: var(--mono);
+  font-size: var(--small);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* ---------- Top strip ---------- */
+
+.strip {
+  display: flex;
+  align-items: center;
+  gap: calc(var(--u) * 3);
+  padding-bottom: max(8px, calc(var(--u) * 0.8));
+  border-bottom: 1px solid var(--neon);
+}
+
+/* Small solid triangle, the series mark */
+.mark {
+  width: max(12px, calc(var(--u) * 1));
+  aspect-ratio: 1;
+  background: var(--neon);
+  clip-path: polygon(0 100%, 50% 0, 100% 100%);
+}
+
+/* Subheadings and section labels in the videotext face (after the mono rule above) */
+.kicker, .subtitle, .label, .log-head {
+  font-family: var(--video);
+  font-size: 22px;
+  line-height: 1;
+  letter-spacing: 0.03em;
+}
+
+.reg {
+  margin-left: auto;
+  width: max(16px, calc(var(--u) * 1.5));
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: 1px solid var(--neon);
+  background:
+    linear-gradient(var(--neon), var(--neon)) center / 1px 100% no-repeat,
+    linear-gradient(var(--neon), var(--neon)) center / 100% 1px no-repeat;
+}
+
+/* ---------- Hero: title + next up ---------- */
+
+.hero {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: calc(var(--u) * 4);
+  margin-top: calc(var(--u) * 5);
+}
+
+/* Plus-shaped registration crosses */
+.cross {
+  position: absolute;
+  width: 15px;
+  aspect-ratio: 1;
+  background:
+    linear-gradient(var(--neon), var(--neon)) center / 1px 100% no-repeat,
+    linear-gradient(var(--neon), var(--neon)) center / 100% 1px no-repeat;
+}
+.c1 { top: 0; left: 52%; }
+.c2 { bottom: calc(var(--u) * -3); left: 52%; }
+
+.kicker {
+  margin-bottom: calc(var(--u) * 1.5);
+  color: var(--mute);
+}
+
+h1 {
+  width: min-content;            /* one word per line */
+  font-size: calc(var(--u) * 13);
+  font-weight: 900;
+  font-stretch: 125%;
+  font-variation-settings: "wdth" 125;
+  line-height: 0.84;
+  letter-spacing: -0.035em;
+  text-transform: uppercase;
+}
+
+.subtitle {
+  display: flex;
+  align-items: center;
+  gap: max(8px, calc(var(--u) * 0.9));
+  margin-top: calc(var(--u) * 2);
+}
+
+.tick {
+  width: max(9px, calc(var(--u) * 0.8));
+  aspect-ratio: 1;
+  background: var(--purple);
+}
+
+/* The one loud block on the page: neon panel with a chamfered corner */
+.next-up {
+  flex: 0 0 max(240px, calc(var(--u) * 24));
+  padding: max(16px, calc(var(--u) * 1.5));
+  background: var(--neon);
+  color: var(--void);
+  display: flex;
+  flex-direction: column;
+  --cut: max(22px, calc(var(--u) * 2.2));
+  clip-path: polygon(0 0, calc(100% - var(--cut)) 0, 100% var(--cut), 100% 100%, 0 100%);
+}
+
+.next-up:has(.nx-speaker:empty) { display: none; }
+
+.next-up h2 {
+  display: flex;
+  justify-content: space-between;
+  font-weight: 700;
+  padding-right: var(--cut);
+  padding-bottom: max(8px, calc(var(--u) * 0.7));
+  border-bottom: 1px solid var(--void);
+}
+
+.nx-date {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-top: calc(var(--u) * 3);
+  font-weight: 800;
+  font-variation-settings: "wdth" 62;
+  text-transform: uppercase;
+  line-height: 0.8;
+}
+
+.nx-date span:first-child { font-size: max(28px, calc(var(--u) * 3)); }
+.nx-date span:last-child  { font-size: max(80px, calc(var(--u) * 9)); letter-spacing: -0.03em; }
+
+.nx-speaker {
+  margin-top: max(10px, calc(var(--u) * 1));
+  font-size: max(26px, calc(var(--u) * 2.8));
+  font-weight: 900;
+  font-variation-settings: "wdth" 125;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+.nx-title {
+  margin-top: 6px;
+  font-size: clamp(14px, calc(var(--u) * 1.2), 18px);
+  line-height: 1.25;
+}
+
+.nx-foot {
+  display: flex;
+  justify-content: space-between;
+  margin-top: max(16px, calc(var(--u) * 1.6));
+  padding: 6px 8px;
+  background: var(--void);
+  color: var(--neon);
+}
+
+/* ---------- Season progress ---------- */
+
+.progress {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 2.4fr);
+  gap: calc(var(--u) * 6);
+  align-items: center;
+  margin-top: calc(var(--u) * 6);
+}
+
+.segments {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  gap: 4px;
+}
+
+.segments li {
+  flex: 1;
+  height: max(18px, calc(var(--u) * 1.4));
+  border: 1px solid var(--neon);
+  display: flex;
+  align-items: flex-end;
+  padding: 0 3px;
+  font-family: var(--pixel);
+  font-size: 9px;
+  line-height: 1.4;
+}
+
+.segments li.past { background: var(--neon); color: var(--void); }
+.segments li.next { background: var(--purple); border-color: var(--purple); }
+
+/* ---------- Lower band: brief + log side by side ---------- */
+
+.lower {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 2.4fr);
+  gap: calc(var(--u) * 6);
+  align-items: start;
+  margin-top: calc(var(--u) * 4);
+}
+
+.label { color: var(--mute); }
+
+.blurb {
+  margin-top: max(10px, calc(var(--u) * 1));
+  max-width: 26em;
+  font-size: clamp(15px, calc(var(--u) * 1.35), 22px);
+  line-height: 1.4;
+}
+
+/* Short diagonal hazard band */
+.hazard {
+  display: block;
+  width: max(110px, calc(var(--u) * 9));
+  height: max(12px, calc(var(--u) * 0.9));
+  margin-top: calc(var(--u) * 3);
+  background: repeating-linear-gradient(-45deg, var(--neon) 0 6px, transparent 6px 12px);
+}
+
+/* ---------- Log ---------- */
+
+.log-head,
+.talks li {
+  display: grid;
+  grid-template-columns:
+    clamp(36px, calc(var(--u) * 4), 64px)
+    clamp(64px, calc(var(--u) * 7), 110px)
+    clamp(96px, calc(var(--u) * 12), 190px)
+    1fr;
+  align-items: baseline;
+}
+
+.log-head {
+  padding-bottom: 8px;
+  border-bottom: max(3px, calc(var(--u) * 0.25)) solid var(--neon);
+  color: var(--mute);
+}
+
+.talks {
+  list-style: none;
+  padding: 0;
+}
+
+.talks li {
+  position: relative;
+  padding: clamp(6px, calc(var(--u) * 0.55), 10px) 0;
+  border-bottom: 1px solid rgb(192 254 4 / 0.22);
+  font-size: clamp(13px, calc(var(--u) * 1.1), 18px);
+  line-height: 1.2;
+}
+
+.talks .speaker {
+  font-weight: 800;
+  font-variation-settings: "wdth" 112;
+  text-transform: uppercase;
+}
+
+.talks li.past { color: var(--mute); }
+
+/* Live week: purple bar, neon type */
+.talks li.next {
+  background: var(--purple);
+  color: var(--neon);
+  border-bottom-color: var(--purple);
+  padding-top: clamp(10px, calc(var(--u) * 0.9), 16px);
+  padding-bottom: clamp(10px, calc(var(--u) * 0.9), 16px);
+}
+
+.talks li.next .wk { padding-left: 8px; }
+
+.talks li.next::after {
+  content: "Live \25B6";
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  translate: 0 -50%;
+  padding: 2px 6px;
+  background: var(--neon);
+  color: var(--purple);
+  font-family: var(--pixel);
+  font-size: 10px;
+}
+
+.talks li.next .title { padding-right: 70px; }
+
+/* Row hover: surface fill with a neon bar on the left edge */
+.talks li { transition: background-color 120ms; }
+.talks li:not(.next):hover {
+  background: var(--surface);
+  box-shadow: inset 3px 0 0 var(--neon);
+}
+.talks li.past:hover { color: var(--neon); }
+.talks li:hover .wk { padding-left: 8px; }
+
+/* ---------- Reticle cursor (cursor.js) ---------- */
+
+.aiming .talks,
+.aiming .talks * { cursor: none; }
+
+.reticle {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 150ms;
+}
+
+.reticle.on { opacity: 1; }
+
+/* Four corner brackets plus a center dot */
+.reticle-box {
+  --s: 34px;
+  --t: 9px;
+  --k: var(--neon);
+  position: absolute;
+  width: var(--s);
+  height: var(--s);
+  translate: -50% -50%;
+  background:
+    linear-gradient(var(--k), var(--k)) 0 0 / var(--t) 2px,
+    linear-gradient(var(--k), var(--k)) 0 0 / 2px var(--t),
+    linear-gradient(var(--k), var(--k)) 100% 0 / var(--t) 2px,
+    linear-gradient(var(--k), var(--k)) 100% 0 / 2px var(--t),
+    linear-gradient(var(--k), var(--k)) 0 100% / var(--t) 2px,
+    linear-gradient(var(--k), var(--k)) 0 100% / 2px var(--t),
+    linear-gradient(var(--k), var(--k)) 100% 100% / var(--t) 2px,
+    linear-gradient(var(--k), var(--k)) 100% 100% / 2px var(--t),
+    radial-gradient(circle, var(--k) 2px, transparent 2.5px) center / 6px 6px;
+  background-repeat: no-repeat;
+}
+
+.reticle.locked .reticle-box { animation: lock 260ms ease-out; }
+
+@keyframes lock {
+  from { width: 64px; height: 64px; opacity: 0.4; }
+  to   { width: var(--s); height: var(--s); opacity: 1; }
+}
+
+/* Readout tag that rides along to the lower right */
+.reticle-read {
+  position: absolute;
+  left: 24px;
+  top: 20px;
+  padding: 3px 7px;
+  white-space: nowrap;
+  background: var(--neon);
+  color: var(--void);
+  font-family: var(--pixel);
+  font-size: 10px;
+  text-transform: uppercase;
+}
+
+.reticle.live .reticle-read { background: var(--neon); color: var(--purple); }
+
+@media (prefers-reduced-motion: reduce) {
+  .reticle.locked .reticle-box { animation: none; }
+}
+
+/* ---------- Footer ---------- */
+
+footer {
+  margin-top: auto;
+  padding-top: calc(var(--u) * 5);
+  display: flex;
+  align-items: flex-end;
+  gap: calc(var(--u) * 3);
+  line-height: 1.5;
+}
+
+.barcode {
+  margin-left: auto;
+  width: max(120px, calc(var(--u) * 10));
+  height: max(28px, calc(var(--u) * 2.4));
+  background:
+    repeating-linear-gradient(90deg,
+      var(--neon) 0 2px, transparent 2px 4px,
+      var(--neon) 4px 5px, transparent 5px 8px,
+      var(--neon) 8px 11px, transparent 11px 12px,
+      var(--neon) 12px 13px, transparent 13px 17px);
+}
+
+.eol { color: var(--mute); }
+
+/* ---------- Side rail: the main call to action ---------- */
+
+.rail {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: var(--rail);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 0;
+  background: var(--neon);
+  color: var(--void);
+}
+
+.rail-tag,
+.rail-cta {
+  writing-mode: vertical-rl;
+}
+
+.rail-cta {
+  font-size: clamp(22px, calc(var(--u) * 2.8), 56px);
+  font-weight: 900;
+  font-variation-settings: "wdth" 125;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  line-height: 1;
+}
+
+.rail-arrow { font-size: 14px; }
+
+/* ---------- Narrow screens ---------- */
+
+@media (max-width: 900px) {
+  .lower, .progress { grid-template-columns: 1fr; gap: 16px; }
+  .blurb { max-width: 34em; }
+  .segments li span { display: none; }
+}
+
+@media (max-width: 640px) {
+  h1 { font-size: calc(var(--u) * 17); }
+  .hero { flex-direction: column; align-items: stretch; }
+  .next-up { flex-basis: auto; }
+  .cross, .hide-sm { display: none; }
+
+  /* The rail turns into a band across the bottom */
+  .poster { margin-right: 0; padding-bottom: 80px; }
+  .rail {
+    top: auto;
+    left: 0;
+    width: auto;
+    height: 56px;
+    flex-direction: row;
+    padding: 0 16px;
+  }
+  .rail-tag, .rail-cta { writing-mode: horizontal-tb; }
+  .rail-cta { font-size: 18px; }
+}
