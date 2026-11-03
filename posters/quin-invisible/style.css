@@ -1,0 +1,41 @@
+/* Invisible poster. The text is all there; it's just white on white. */
+
+html, body {
+  margin: 0;
+  min-height: 100vh;
+  background: #fff;
+  color: #fff;
+  color-scheme: only light;
+}
+
+.poster {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 40px 16px;
+  font-family: Georgia, serif;
+  font-size: 17px;
+  line-height: 1.5;
+}
+
+h1 {
+  font-size: 56px;
+  line-height: 1;
+  margin: 8px 0;
+}
+
+h2 {
+  font-size: 13px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin: 32px 0 4px;
+}
+
+ol {
+  padding-left: 1.2em;
+}
+
+/* Selecting the page is the only way a person can read it. */
+::selection {
+  background: #1a1a1a;
+  color: #fff;
+}

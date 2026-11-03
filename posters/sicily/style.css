@@ -1,0 +1,305 @@
+/* Sicily's poster: two-color riso
+   Paper: chartreuse fading to bare stock. Inks: black + fluoro pink.
+   Type: Archivo Black for HEAR / OUT, Yellowtail script for "me" and the
+   lineup heading, Space Mono for everything you read up close. */
+
+:root {
+  --paper: #CDE64A;
+  --stock: #F5F2E9;
+  --pink: #F04BB5;
+  --ink: #151515;
+  --offset: 7px;   /* how far the pink plate is misregistered */
+  --ghost: .35;    /* strength of the dotted ghost lettering */
+}
+
+* { box-sizing: border-box; }
+
+html, body { margin: 0; background: #e9e6dc; }
+
+body {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.defs { position: absolute; width: 0; height: 0; }
+
+.visually-hidden {
+  position: absolute; width: 1px; height: 1px; overflow: hidden;
+  clip: rect(0 0 0 0); white-space: nowrap;
+}
+
+/* ---------- ink textures ---------- */
+
+.tex { filter: url(#riso-ink); }
+.tex-soft { filter: url(#riso-ink-soft); }
+.fine { filter: url(#riso-ink-fine); }
+
+/* ---------- sheet ---------- */
+
+.poster {
+  position: relative;
+  width: 900px;
+  height: 1200px;
+  overflow: hidden;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: 'Archivo', sans-serif;
+  zoom: var(--scale, 1);   /* set by the script in index.html */
+}
+
+.fade {
+  position: absolute;
+  left: 0; top: 490px;
+  width: 900px; height: 710px;
+  background: linear-gradient(to bottom,
+    rgba(245, 242, 233, 0) 0%,
+    rgba(245, 242, 233, .55) 40%,
+    var(--stock) 88%);
+}
+
+.grain {
+  position: absolute; left: 0; top: 0;
+  pointer-events: none;
+  mix-blend-mode: multiply;
+  opacity: .35;
+}
+
+/* ---------- ghost lettering ---------- */
+
+.ghost { position: absolute; overflow: hidden; }
+
+.ghost .dots {
+  position: absolute;
+  transform: rotate(180deg);
+  font-family: 'Archivo Black', sans-serif;
+  line-height: .9;
+  letter-spacing: -.02em;
+  text-transform: uppercase;
+  background-image: radial-gradient(circle, var(--ink) 2.4px, transparent 2.9px);
+  background-size: 9px 9px;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+.ghost-top {
+  left: 0; top: 0;
+  width: 900px; height: 690px;
+  opacity: var(--ghost);
+  -webkit-mask-image: linear-gradient(to bottom, #000 58%, transparent 69%);
+  mask-image: linear-gradient(to bottom, #000 58%, transparent 69%);
+}
+.ghost-top .dots {
+  left: -30px; top: -10px;
+  width: 960px;
+  font-size: 236px;
+  text-align: center;
+}
+
+.ghost-corner {
+  left: 380px; top: 900px;
+  width: 520px; height: 300px;
+  opacity: calc(var(--ghost) * .55);
+  -webkit-mask-image: linear-gradient(to top left, #000 35%, transparent 80%);
+  mask-image: linear-gradient(to top left, #000 35%, transparent 80%);
+}
+.ghost-corner .dots {
+  right: -150px; top: 90px;
+  font-size: 330px;
+  white-space: nowrap;
+}
+
+/* ---------- mic ---------- */
+
+.mic {
+  position: absolute;
+  left: 420px; top: 0;
+  width: 540px; height: 684px;
+  image-rendering: pixelated;   /* keep the dither dots crisp */
+}
+
+/* ---------- title ---------- */
+
+.title {
+  position: absolute; inset: 0;
+  margin: 0;
+  font-weight: 400;
+  pointer-events: none;
+}
+
+.t {
+  position: absolute;
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 192px;
+  line-height: 1;
+  letter-spacing: .01em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+.t.plate { color: var(--pink); }
+
+.hear { left: 38px; top: 60px; }
+.hear.plate { left: calc(38px + var(--offset)); top: calc(60px + var(--offset)); }
+
+.out { right: 38px; top: 318px; }
+.out.plate { right: calc(38px - var(--offset)); top: calc(318px + var(--offset)); }
+
+.me {
+  position: absolute;
+  left: 232px; top: 96px;
+  font-family: 'Yellowtail', cursive;
+  font-size: 330px;
+  line-height: 1;
+  color: var(--pink);
+}
+
+/* ---------- small print tags with selection handles ---------- */
+
+.tag {
+  position: absolute;
+  top: 24px;
+  margin: 0;
+  padding: 4px 8px;
+  border: 1.5px solid var(--pink);
+  background: var(--paper);
+  font-family: 'Space Mono', monospace;
+  font-size: 11.5px;
+  letter-spacing: .02em;
+  line-height: 1.2;
+  color: var(--ink);
+}
+.tag-left { left: 40px; }
+.tag-right { right: 40px; }
+
+.hd {
+  position: absolute;
+  width: 8px; height: 8px;
+  background: var(--paper);
+  border: 1.5px solid var(--pink);
+}
+.tl { left: -5px; top: -5px; }
+.tr { right: -5px; top: -5px; }
+.bl { left: -5px; bottom: -5px; }
+.br { right: -5px; bottom: -5px; }
+
+/* ---------- subhead ---------- */
+
+.subhead {
+  position: absolute;
+  left: 40px; top: 404px;
+  margin: 0;
+  padding: 8px 16px 10px;
+  background: var(--ink);
+  color: var(--paper);
+  box-shadow: 0 0 0 1.5px var(--pink);
+  font-weight: 800;
+  font-style: italic;
+  font-size: 26px;
+  letter-spacing: .01em;
+  text-transform: lowercase;
+}
+
+/* ---------- blurb + rule ---------- */
+
+.blurb {
+  position: absolute;
+  left: 40px; top: 494px;
+  width: 400px;
+  margin: 0;
+  font-family: 'Space Mono', monospace;
+  font-size: 14.5px;
+  line-height: 1.5;
+  color: var(--ink);
+}
+.blurb strong { font-weight: 700; }
+
+/* same text, invisible, so the highlight band lines up exactly under the words */
+.blurb-ink {
+  color: transparent;
+  opacity: .6;
+  pointer-events: none;
+}
+.blurb-hl {
+  background: linear-gradient(transparent 44%, var(--pink) 44%, var(--pink) 92%, transparent 92%);
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+.rule {
+  position: absolute;
+  left: 40px; top: 624px;
+  width: 400px;
+  margin: 0;
+  font-family: 'Space Mono', monospace;
+  font-weight: 700;
+  font-style: italic;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+/* ---------- lineup ---------- */
+
+.lineup {
+  position: absolute;
+  left: 40px; right: 40px; top: 680px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.lineup-head { display: flex; align-items: center; gap: 14px; }
+.lineup-head h2 {
+  margin: 0;
+  font-family: 'Yellowtail', cursive;
+  font-weight: 400;
+  font-size: 50px;
+  line-height: 1;
+  color: var(--pink);
+}
+.lineup-rule { flex: 1; height: 4px; margin-top: 10px; background: var(--pink); }
+
+.talks {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-rows: repeat(7, 58px);   /* updated by the script for the actual count */
+  grid-auto-flow: column;
+  column-gap: 44px;
+}
+
+.talk {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  border-top: 1.5px solid rgba(21, 21, 21, .16);
+  padding-top: 7px;
+  min-width: 0;
+}
+.talk.first { border-top-color: transparent; }
+
+.date {
+  flex: 0 0 auto;
+  width: 50px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-family: 'Space Mono', monospace;
+  font-weight: 700;
+  line-height: 1;
+}
+.mon { font-size: 10px; letter-spacing: .14em; text-transform: uppercase; }
+.day { font-size: 24px; letter-spacing: -.02em; text-shadow: 2.5px 2px 0 var(--pink); }
+
+.who { display: flex; flex-direction: column; gap: 3px; min-width: 0; flex: 1; }
+.name {
+  font-family: 'Space Mono', monospace;
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 1;
+  text-transform: uppercase;
+  letter-spacing: .02em;
+}
+.what { font-family: 'Space Mono', monospace; font-size: 11.5px; line-height: 1.25; }
+.tbd { font-style: italic; letter-spacing: .02em; }
