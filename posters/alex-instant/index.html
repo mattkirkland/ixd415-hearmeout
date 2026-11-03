@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hear Me Out poster: Instant</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Caveat:wght@600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!--
+    Instant: a faded 70s instant-camera ad. The next talk prints out of the
+    camera and develops; the rest of the schedule is a spread of instant
+    photos. Past talks are fully developed, upcoming ones are still murky.
+  -->
+
+  <main class="poster">
+
+    <div class="topline">
+      <span data-series="course"></span>
+      <span class="divider"></span>
+      <span data-series="when"></span>
+    </div>
+
+    <section class="hero">
+      <div class="rainbow" aria-hidden="true"></div>
+
+      <div class="camera" aria-hidden="true">
+        <div class="cam-top">
+          <span class="badge">One Talk</span>
+          <span class="viewfinder"></span>
+          <span class="lens"></span>
+          <span class="stripe"></span>
+          <span class="shutter"></span>
+          <span class="sensor"></span>
+        </div>
+        <div class="cam-base">
+          <span class="plate">Hear Me Out Land Camera</span>
+        </div>
+      </div>
+
+      <div class="print-slot">
+        <figure class="print print-next">
+          <div class="photo">
+            <span class="label">Next up</span>
+            <span class="speaker" data-next="speaker"></span>
+            <span class="date" data-next="date" data-format="long"></span>
+          </div>
+          <figcaption data-next="title"></figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <header class="masthead">
+      <h1 data-series="title"></h1>
+      <div class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+      <p class="subtitle" data-series="subtitle"></p>
+    </header>
+
+    <p class="blurb" data-series="blurb"></p>
+
+    <section class="roll">
+      <h2>The whole roll</h2>
+      <ol class="prints" data-talks>
+        <template>
+          <li class="print">
+            <div class="photo">
+              <span class="date" data-field="date"></span>
+              <span class="speaker" data-field="speaker"></span>
+            </div>
+            <p class="caption" data-field="title"></p>
+          </li>
+        </template>
+      </ol>
+    </section>
+
+    <footer>
+      <span class="big" data-series="term"></span>
+      <span class="where" data-series="where"></span>
+      <span class="big">Now.</span>
+    </footer>
+
+  </main>
+
+  <script src="../../data.js"></script>
+  <script src="../poster.js"></script>
+</body>
+</html>
