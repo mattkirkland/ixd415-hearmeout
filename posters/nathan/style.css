@@ -1,0 +1,153 @@
+/* Hear Me Out - Riso. Yellowtail + Space Mono, self-hosted (OFL). See CREDITS.txt. */
+
+@font-face { font-family: Yellowtail; src: url(fonts/yellowtail.woff2) format('woff2'); font-weight: 400; font-display: block; }
+@font-face { font-family: 'Space Mono'; src: url(fonts/spacemono-400.woff2) format('woff2'); font-weight: 400; font-display: block; }
+@font-face { font-family: 'Space Mono'; src: url(fonts/spacemono-700.woff2) format('woff2'); font-weight: 700; font-display: block; }
+
+:root {
+  --paper: #efece3;
+  --ink: #16161a;
+  --blue: #1d2ea0;
+  --gut: clamp(16px, 3.4vw, 46px);
+}
+
+* { box-sizing: border-box; }
+
+.defs { position: absolute; width: 0; height: 0; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: 'Space Mono', ui-monospace, Menlo, monospace;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* paper tooth: a faint speckle under everything */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 3;
+  opacity: 0.5;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='g'><feTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3'/><feColorMatrix type='saturate' values='0'/></filter><rect width='160' height='160' filter='url(%23g)' opacity='0.22'/></svg>");
+}
+
+.poster {
+  position: relative;
+  min-height: 100vh;
+  padding: var(--gut);
+  display: flex;
+  flex-direction: column;
+}
+
+/* --- hairline rules --- */
+.rule {
+  display: flex;
+  justify-content: space-between;
+  gap: 1em;
+  flex-wrap: wrap;
+  font-size: clamp(8px, 0.95vw, 11px);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.top { border-bottom: 1px solid var(--ink); padding-bottom: 9px; }
+
+.mid {
+  border-top: 1px solid var(--ink);
+  border-bottom: 1px solid var(--ink);
+  padding: 9px 0;
+  margin-top: -0.4em;
+}
+
+.mid .sub { color: var(--blue); font-weight: 700; }
+
+/* --- the plate --- */
+.plate {
+  margin: clamp(10px, 1.8vh, 22px) 0 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.plate img {
+  display: block;
+  /* fills the measure so the plate sits on the same grid as the rules */
+  width: 100%;
+  height: clamp(230px, 37vh, 430px);
+  object-fit: cover;
+  object-position: center 38%;
+  /* it is already 1-bit; keep the dots hard instead of letting the browser smooth them */
+  image-rendering: pixelated;
+}
+
+.plate figcaption {
+  order: -1;
+  margin: 0 0 7px;
+  align-self: flex-start;
+  font-size: clamp(7px, 0.85vw, 10px);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  opacity: 0.55;
+}
+
+/* --- the wordmark --- */
+.wordmark {
+  margin: clamp(-30px, -3vw, -12px) 0 0;
+  font-family: Yellowtail, 'Brush Script MT', cursive;
+  font-weight: 400;
+  /* sized off the measure so it always fills it on one line:
+     Yellowtail sets 'Hear Me Out' at ~5.55x its font-size */
+  font-size: calc((100vw - 2 * var(--gut)) / 5.75);
+  line-height: 1;
+  white-space: nowrap;
+  text-align: center;
+  color: var(--blue);
+  filter: url(#ink);
+  mix-blend-mode: multiply;
+}
+
+.blurb {
+  margin: clamp(12px, 2vh, 24px) 0 clamp(14px, 2.4vh, 28px);
+  max-width: 62ch;
+  font-size: clamp(11px, 1.3vw, 15px);
+  line-height: 1.5;
+}
+
+/* --- schedule --- */
+.schedule {
+  list-style: none;
+  margin: auto 0 0;
+  padding: 0;
+  border-top: 2px solid var(--ink);
+  columns: 2;
+  column-gap: clamp(20px, 3vw, 48px);
+}
+
+.schedule li {
+  break-inside: avoid;
+  display: grid;
+  grid-template-columns: 2.6em 3.4em 1fr;
+  gap: 0 0.7em;
+  padding: 7px 0;
+  border-bottom: 1px solid rgba(22,22,26,0.18);
+  font-size: clamp(9px, 1.05vw, 12px);
+  line-height: 1.35;
+}
+
+.wk { font-weight: 700; color: var(--blue); }
+.wk::before { content: "W"; opacity: 0.45; }
+.dt { opacity: 0.5; }
+.sp { font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; }
+.ti { grid-column: 3; opacity: 0.72; }
+
+.schedule li.past { opacity: 0.36; }
+.schedule li.next { border-bottom: 2px solid var(--blue); }
+.schedule li.next .sp { color: var(--blue); }
+
+@media (max-width: 560px) {
+  .schedule { columns: 1; }
+}
