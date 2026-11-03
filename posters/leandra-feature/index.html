@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hear Me Out poster: Feature Presentation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Leandra's poster: "Feature Presentation". A minimal, Swiss-style film poster on
+       one 8.5 x 11 sheet: black, white, and one pink. A strict grid, one
+       grotesk typeface, a huge flush-left title, one big circle, the
+       presenters billed across the top like a cast, and a film-style
+       credit block at the bottom. -->
+
+  <main class="poster">
+
+    <!-- Presenters billed across the top, like the cast of a film -->
+    <ol class="cast" data-talks aria-label="Presenters">
+      <template>
+        <li data-field="speaker"></li>
+      </template>
+    </ol>
+
+    <!-- The one graphic: a circle, like a spotlight or a speaker cone -->
+    <div class="circle" aria-hidden="true"></div>
+    <div class="waves" aria-hidden="true"></div>
+
+    <header>
+      <h1 data-series="title" data-split></h1>
+      <p class="tagline">Convince us to think differently<br>than we did ten minutes ago.</p>
+    </header>
+
+    <section class="next-up">
+      <h2>Next screening</h2>
+      <p class="next-date" data-next="date" data-format="long"></p>
+      <p class="next-speaker" data-next="speaker"></p>
+      <p class="next-title" data-next="title"></p>
+    </section>
+
+    <dl class="facts">
+      <div><dt>When</dt><dd data-series="when"></dd></div>
+      <div><dt>Where</dt><dd data-series="where"></dd></div>
+      <div><dt>Running time</dt><dd>5&ndash;10 min</dd></div>
+    </dl>
+
+    <!-- Billing block: the full program in small type, like film credits -->
+    <footer>
+      <p class="billing-lead"><span data-series="course"></span> presents <span class="em" data-series="title"></span> <span data-series="subtitle"></span>, <span data-series="term"></span></p>
+      <ol class="billing" data-talks>
+        <template>
+          <li><span class="date" data-field="date"></span> <span class="speaker" data-field="speaker"></span> <span class="title" data-field="title"></span></li>
+        </template>
+      </ol>
+      <p class="blurb" data-series="blurb"></p>
+    </footer>
+
+  </main>
+
+  <script src="../../data.js"></script>
+  <script src="../poster.js"></script>
+  <script>
+    // Split [data-split] text into one span per word (runs after poster.js
+    // has filled in the title from data.js, so the words still come from the data).
+    document.querySelectorAll('[data-split]').forEach(function (el) {
+      var words = el.textContent.trim().split(/\s+/);
+      el.setAttribute('aria-label', el.textContent.trim());
+      el.textContent = '';
+      words.forEach(function (word, i) {
+        var span = document.createElement('span');
+        span.className = 'w w' + (i + 1);
+        span.setAttribute('aria-hidden', 'true');
+        span.textContent = word;
+        el.appendChild(span);
+      });
+    });
+  </script>
+</body>
+</html>
