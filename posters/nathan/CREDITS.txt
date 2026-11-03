@@ -1,0 +1,12 @@
+Image
+  "No. 10. State University of Kansas, on Mount Oread, Lawrence, Kansas."
+  Photo by R. Benecke, St. Louis, MO. c. 1870s-80s. Original Fraser Hall.
+  Source: Wikimedia Commons, via Flickr Commons.
+  https://commons.wikimedia.org/wiki/File:No._10._State_University_of_Kansas,_on_Mount_Oread,_Lawrence,_Kansas._(5569456560).jpg
+  Rights: No known copyright restrictions (public domain).
+  Treatment: converted to greyscale, Floyd-Steinberg dithered to 1-bit, inked
+  in a single colour. Script: riso.py in this folder (reproducible: python riso.py in.jpg out.png 640 1.25 1.05).
+
+Fonts (both SIL Open Font License 1.1, self-hosted in fonts/)
+  Yellowtail - Astigmatic One Eye Typographic Institute
+  Space Mono - Colophon Foundry

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hear Me Out poster: Mount Oread</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!--
+    The plate is an 1880s photograph of the original Fraser Hall on Mount Oread,
+    dithered to 1-bit and inked in one colour, the way a riso lays down a single
+    drum. Public domain; see CREDITS.txt.
+
+    The wordmark's ragged edge is the SVG filter below, not an image: turbulence
+    displacing the glyph outlines so the script prints like it bled into paper.
+  -->
+
+  <svg class="defs" aria-hidden="true" focusable="false">
+    <filter id="ink" x="-8%" y="-18%" width="116%" height="136%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.018 0.045" numOctaves="4" seed="7" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="7" xChannelSelector="R" yChannelSelector="G" result="d"/>
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="3" result="grain"/>
+      <feDisplacementMap in="d" in2="grain" scale="2.2" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+  </svg>
+
+  <main class="poster">
+
+    <header class="rule top">
+      <span data-series="course"></span>
+      <span data-series="term"></span>
+    </header>
+
+    <figure class="plate">
+      <img src="oread-riso.png" alt="The original Fraser Hall on Mount Oread, about 1880, printed as a one-colour halftone">
+      <figcaption>Mount Oread, c.1880 &middot; public domain &middot; dithered to one ink</figcaption>
+    </figure>
+
+    <h1 class="wordmark" data-series="title"></h1>
+
+    <header class="rule mid">
+      <span class="sub" data-series="subtitle"></span>
+      <span><span data-series="when"></span> &middot; <span data-series="where"></span></span>
+    </header>
+
+    <p class="blurb" data-series="blurb"></p>
+
+    <ol class="schedule" data-talks>
+      <template>
+        <li>
+          <span class="wk" data-field="week"></span>
+          <span class="dt" data-field="date" data-format="numeric"></span>
+          <span class="sp" data-field="speaker"></span>
+          <span class="ti" data-field="title"></span>
+        </li>
+      </template>
+    </ol>
+
+  </main>
+
+  <script src="../../data.js"></script>
+  <script src="../poster.js"></script>
+</body>
+</html>
